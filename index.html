@@ -2,110 +2,812 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>RLI Inventory</title>
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #1f2937;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 28px 48px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        header p {
+            margin: 6px 0 0;
+            font-size: 17px;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            max-width: 1100px;
+            margin: 45px auto;
+            padding: 0 25px;
+        }
+
+        .welcome {
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            font-size: 17px;
+        }
+
+        /* =========================
+           PROJECT
+        ========================= */
+
+        .project-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .project-card label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .project-card select {
+            width: 300px;
+            max-width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 7px;
+            border: 1px solid #ccc;
+        }
+
+        /* =========================
+           BLOCK
+        ========================= */
+
+        .block-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .block-card h2 {
+            margin-top: 0;
+            font-size: 28px;
+        }
+
+        .lot-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* =========================
+           LOT BUTTONS
+        ========================= */
+
+        .lot {
+            width: 70px;
+            height: 55px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: #e5e7eb;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .lot:hover {
+            background: #2563eb;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-button {
+            margin-top: 25px;
+
+            padding: 13px 22px;
+
+            border: 2px solid #2563eb;
+            border-radius: 8px;
+
+            background: white;
+            color: #2563eb;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* =========================
+           UNIT DETAILS POPUP
+        ========================= */
+
+        .modal {
+
+            display: none;
+
+            position: fixed;
+
+            z-index: 9999;
+
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0,0,0,0.65);
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .modal-content {
+
+            background: white;
+
+            width: 100%;
+            max-width: 500px;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+
+            position: relative;
+
+            animation: popup 0.2s ease-out;
+        }
+
+        @keyframes popup {
+
+            from {
+                transform: scale(0.85);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+        }
+
+        /* =========================
+           CLOSE BUTTON
+        ========================= */
+
+        .close {
+
+            position: absolute;
+
+            right: 20px;
+            top: 12px;
+
+            font-size: 30px;
+
+            font-weight: bold;
+
+            color: #777;
+
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        /* =========================
+           DETAILS
+        ========================= */
+
+        .modal-content h2 {
+
+            margin-top: 0;
+
+            margin-bottom: 25px;
+
+            font-size: 26px;
+        }
+
+        .detail-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 9px 0;
+
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-label {
+            font-weight: bold;
+        }
+
+        .detail-value {
+            text-align: right;
+        }
+
+        /* =========================
+           PAYMENT BUTTON
+        ========================= */
+
+        .payment-button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            margin-top: 25px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .payment-button:hover {
+            background: #1d4ed8;
+        }
+
+        /* =========================
+           HOLD BUTTON
+        ========================= */
+
+        .hold-button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            margin-top: 10px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #111827;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .hold-button:hover {
+            background: #374151;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 22px;
+            }
+
+            header h1 {
+                font-size: 26px;
+            }
+
+            .container {
+                margin: 25px auto;
+            }
+
+            .welcome h2 {
+                font-size: 27px;
+            }
+
+            .lot {
+                width: 58px;
+                height: 50px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
+
     <h1>RLI Sellers Portal</h1>
+
     <p>Real-time Sales & Inventory</p>
+
 </header>
+
+
+
+<!-- =========================
+     MAIN CONTENT
+========================= -->
 
 <main class="container">
 
+
     <section class="welcome">
+
         <h2>Inventory</h2>
-        <p>Select an available unit.</p>
+
+        <p>
+            Select an available unit.
+        </p>
+
     </section>
 
-    <section class="card">
+
+
+    <!-- PROJECT -->
+
+    <section class="project-card">
+
+        <label for="project">
+            PROJECT
+        </label>
+
+        <select id="project">
+
+            <option value="AGAPEYA">
+                AGAPEYA
+            </option>
+
+            <option value="VALENZIA ENCLAVE EAST">
+                VALENZIA ENCLAVE EAST
+            </option>
+
+            <option value="AGAPEYA WEST">
+                AGAPEYA WEST
+            </option>
+
+            <option value="ESTANZIA ENCLAVE EAST">
+                ESTANZIA ENCLAVE EAST
+            </option>
+
+            <option value="THE PENTHOUSE AT JEN">
+                THE PENTHOUSE AT JEN
+            </option>
+
+        </select>
+
+    </section>
+
+
+
+    <!-- BLOCK 1 -->
+
+    <section class="block-card">
 
         <h2>BLOCK 1</h2>
 
+
         <div class="lot-grid">
 
-            <button type="button" class="lot" onclick="showUnitDetails(1)">1</button>
-            <button type="button" class="lot" onclick="showUnitDetails(2)">2</button>
-            <button type="button" class="lot" onclick="showUnitDetails(3)">3</button>
-            <button type="button" class="lot" onclick="showUnitDetails(4)">4</button>
-            <button type="button" class="lot" onclick="showUnitDetails(5)">5</button>
-            <button type="button" class="lot" onclick="showUnitDetails(6)">6</button>
-            <button type="button" class="lot" onclick="showUnitDetails(7)">7</button>
-            <button type="button" class="lot" onclick="showUnitDetails(8)">8</button>
-            <button type="button" class="lot" onclick="showUnitDetails(9)">9</button>
-            <button type="button" class="lot" onclick="showUnitDetails(10)">10</button>
+            <button class="lot"
+                    onclick="showUnitDetails(1)">
+                1
+            </button>
+
+            <button class="lot"
+                    onclick="showUnitDetails(2)">
+                2
+            </button>
+
+            <button class="lot"
+                    onclick="showUnitDetails(3)">
+                3
+            </button>
+
+            <button class="lot"
+                    onclick="showUnitDetails(4)">
+                4
+            </button>
+
+            <button class="lot"
+                    onclick="showUnitDetails(5)">
+                5
+            </button>
+
+            <button class="lot"
+                    onclick="showUnitDetails(6)">
+                6
+            </button>
+
+            <button class="lot"
+                    onclick="showUnitDetails(7)">
+                7
+            </button>
+
+            <button class="lot"
+                    onclick="showUnitDetails(8)">
+                8
+            </button>
+
+            <button class="lot"
+                    onclick="showUnitDetails(9)">
+                9
+            </button>
+
+            <button class="lot"
+                    onclick="showUnitDetails(10)">
+                10
+            </button>
 
         </div>
 
     </section>
 
-    <button type="button" class="secondary" onclick="goBack()">
+
+
+    <!-- BACK -->
+
+    <button
+        class="back-button"
+        onclick="goBack()">
+
         Back to Dashboard
+
     </button>
+
 
 </main>
 
 
-<!-- UNIT DETAILS -->
 
-<div id="unitModal" class="modal">
+<!-- =========================
+     UNIT DETAILS POPUP
+========================= -->
+
+<div
+    id="unitModal"
+    class="modal">
+
 
     <div class="modal-content">
 
-        <span class="close" onclick="closeUnitDetails()">&times;</span>
 
-        <h2>UNIT DETAILS</h2>
+        <!-- CLOSE -->
 
-        <p>Project: <span id="detailProject">AGAPEYA</span></p>
-        <p>Block: <span id="detailBlock">1</span></p>
-        <p>Lot: <span id="detailLot">3</span></p>
-        <p>Lot Area: <span id="detailLotArea">100 sqm</span></p>
-        <p>Floor Area: <span id="detailFloorArea">50 sqm</span></p>
-        <p>House Model: <span id="detailHouseModel">Model A</span></p>
-        <p>Price: <span id="detailPrice">₱3,500,000</span></p>
+        <span
+            class="close"
+            onclick="closeUnitDetails()">
 
-        <br>
+            &times;
 
-        <button type="button" class="primary">
+        </span>
+
+
+
+        <h2>
+            UNIT DETAILS
+        </h2>
+
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Project
+            </span>
+
+            <span
+                class="detail-value"
+                id="detailProject">
+
+                AGAPEYA
+
+            </span>
+
+        </div>
+
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Block
+            </span>
+
+            <span
+                class="detail-value"
+                id="detailBlock">
+
+                1
+
+            </span>
+
+        </div>
+
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Lot
+            </span>
+
+            <span
+                class="detail-value"
+                id="detailLot">
+
+                1
+
+            </span>
+
+        </div>
+
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Lot Area
+            </span>
+
+            <span
+                class="detail-value"
+                id="detailLotArea">
+
+                100 sqm
+
+            </span>
+
+        </div>
+
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Floor Area
+            </span>
+
+            <span
+                class="detail-value"
+                id="detailFloorArea">
+
+                50 sqm
+
+            </span>
+
+        </div>
+
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                House Model
+            </span>
+
+            <span
+                class="detail-value"
+                id="detailHouseModel">
+
+                Model A
+
+            </span>
+
+        </div>
+
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Price
+            </span>
+
+            <span
+                class="detail-value"
+                id="detailPrice">
+
+                ₱3,500,000
+
+            </span>
+
+        </div>
+
+
+
+        <!-- PAYMENT CALCULATOR -->
+
+        <button
+            class="payment-button"
+            onclick="paymentCalculator()">
+
             PAYMENT CALCULATOR
+
         </button>
 
-        <button type="button" class="hold-button">
+
+
+        <!-- HOLD -->
+
+        <button
+            class="hold-button"
+            onclick="holdUnit()">
+
             HOLD THIS UNIT
+
         </button>
+
 
     </div>
 
 </div>
 
 
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
 <script>
+
 
 function showUnitDetails(lotNumber) {
 
-    document.getElementById("detailLot").textContent = lotNumber;
 
-    document.getElementById("unitModal").style.display = "flex";
+    // Get selected project
+
+    const project =
+        document.getElementById("project").value;
+
+
+    // Display project
+
+    document.getElementById("detailProject")
+        .textContent = project;
+
+
+    // Display block
+
+    document.getElementById("detailBlock")
+        .textContent = "1";
+
+
+    // Display lot
+
+    document.getElementById("detailLot")
+        .textContent = lotNumber;
+
+
+    // Show popup
+
+    document.getElementById("unitModal")
+        .style.display = "flex";
 
 }
+
+
 
 function closeUnitDetails() {
 
-    document.getElementById("unitModal").style.display = "none";
+
+    document.getElementById("unitModal")
+        .style.display = "none";
 
 }
 
+
+
 function goBack() {
+
 
     window.location.href = "index.html";
 
 }
 
+
+
+function paymentCalculator() {
+
+
+    alert(
+        "Payment Calculator for Lot " +
+        document.getElementById("detailLot").textContent +
+        " will open here."
+    );
+
+}
+
+
+
+function holdUnit() {
+
+
+    const lot =
+        document.getElementById("detailLot").textContent;
+
+
+    alert(
+        "Hold request for Lot " +
+        lot +
+        " will be processed here."
+    );
+
+}
+
+
+
 </script>
 
+
 </body>
+
 </html>
