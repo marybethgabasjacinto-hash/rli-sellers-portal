@@ -1,575 +1,409 @@
-/* =========================================================
+/* =========================================
    RLI SELLERS PORTAL
-   INVENTORY + UNIT DETAILS
-   ========================================================= */
+   INVENTORY SYSTEM
+========================================= */
 
 
-/* =========================================================
+/* =========================================
    SHOW MIDDLE HOUSING
-   ========================================================= */
+========================================= */
 
 function showHousing() {
 
     document.getElementById("housingSection").style.display = "block";
+
     document.getElementById("condoSection").style.display = "none";
+
     document.getElementById("inventorySection").style.display = "none";
 
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     });
+
 }
 
 
-/* =========================================================
+/* =========================================
    SHOW MIDDLE CONDO
-   ========================================================= */
+========================================= */
 
 function showCondo() {
 
     document.getElementById("housingSection").style.display = "none";
+
     document.getElementById("condoSection").style.display = "block";
+
     document.getElementById("inventorySection").style.display = "none";
 
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     });
+
 }
 
 
-/* =========================================================
+/* =========================================
    OPEN PROJECT
-   ========================================================= */
+========================================= */
 
 function openProject(projectName) {
 
-    document.getElementById("housingSection").style.display = "none";
-    document.getElementById("condoSection").style.display = "none";
+    document.getElementById("projectsSection").style.display = "none";
+
     document.getElementById("inventorySection").style.display = "block";
 
-    const selectedProject =
-        document.getElementById("selectedProject");
+    document.getElementById("selectedProject").innerText = projectName;
 
-    if (selectedProject) {
-        selectedProject.innerText = projectName;
-    }
-
-    renderInventory(projectName);
+    loadInventory(projectName);
 
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     });
+
 }
 
 
-/* =========================================================
-   BACK TO PROJECTS
-   ========================================================= */
+/* =========================================
+   LOAD INVENTORY
+========================================= */
 
-function backToProjects() {
+function loadInventory(projectName) {
 
-    document.getElementById("inventorySection").style.display = "none";
+    const container =
+        document.getElementById("inventoryContainer");
 
-    document.getElementById("housingSection").style.display = "block";
-    document.getElementById("condoSection").style.display = "none";
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
+    container.innerHTML = "";
 
 
-/* =========================================================
-   FORMAT PRICE
-   ========================================================= */
-
-function formatPrice(price) {
-
-    if (price === undefined || price === null || price === "") {
-        return "-";
-    }
-
-    return "₱" + Number(price).toLocaleString("en-PH");
-}
-
-
-/* =========================================================
-   FIND INVENTORY BY PROJECT
-   ========================================================= */
-
-function getProjectInventory(projectName) {
-
-    let housing = [];
-    let condo = [];
-
-    if (
-        typeof INVENTORY_DATA !== "undefined" &&
-        INVENTORY_DATA.middleHousing
-    ) {
-        housing = INVENTORY_DATA.middleHousing.filter(function (item) {
-            return item.project === projectName;
-        });
-    }
-
-    if (
-        typeof INVENTORY_DATA !== "undefined" &&
-        INVENTORY_DATA.middleCondo
-    ) {
-        condo = INVENTORY_DATA.middleCondo.filter(function (item) {
-            return item.project === projectName;
-        });
-    }
-
-    return {
-        housing: housing,
-        condo: condo
-    };
-}
-
-
-/* =========================================================
-   RENDER INVENTORY
-   ========================================================= */
-
-function renderInventory(projectName) {
-
-    const inventorySection =
-        document.getElementById("inventorySection");
-
-    if (!inventorySection) {
-        console.error("inventorySection not found.");
-        return;
-    }
-
-    const result = getProjectInventory(projectName);
-
-    let housing = result.housing;
-    let condo = result.condo;
-
-
-    /* -----------------------------------------
-       FIND OR CREATE INVENTORY CONTAINER
-       ----------------------------------------- */
-
-    let inventoryContainer =
-        document.getElementById("dynamicInventory");
-
-    if (!inventoryContainer) {
-
-        inventoryContainer =
-            document.createElement("div");
-
-        inventoryContainer.id =
-            "dynamicInventory";
-
-        inventorySection.appendChild(
-            inventoryContainer
-        );
-    }
-
-
-    inventoryContainer.innerHTML = "";
-
-
-    /* =====================================================
+    /* =====================================
        MIDDLE HOUSING
-       ===================================================== */
+    ===================================== */
 
-    if (housing.length > 0) {
+    let housingData =
+        INVENTORY_DATA.middleHousing.filter(function(unit) {
 
-        const title =
-            document.createElement("h2");
-
-        title.innerText = "MIDDLE HOUSING";
-
-        inventoryContainer.appendChild(title);
-
-
-        /* GROUP BY BLOCK */
-
-        const blocks = {};
-
-        housing.forEach(function (unit) {
-
-            const block = unit.block || "Block";
-
-            if (!blocks[block]) {
-                blocks[block] = [];
-            }
-
-            blocks[block].push(unit);
-        });
-
-
-        Object.keys(blocks).forEach(function (blockName) {
-
-            const blockCard =
-                document.createElement("div");
-
-            blockCard.className = "card";
-
-
-            const blockTitle =
-                document.createElement("h2");
-
-            blockTitle.innerText = blockName;
-
-            blockCard.appendChild(blockTitle);
-
-
-            const lotGrid =
-                document.createElement("div");
-
-            lotGrid.className = "lot-grid";
-
-
-            blocks[blockName].forEach(function (unit) {
-
-                const lotButton =
-                    document.createElement("button");
-
-                lotButton.type = "button";
-
-                lotButton.className = "lot";
-
-                lotButton.innerText =
-                    unit.lot
-                        ? unit.lot.replace("Lot ", "")
-                        : "-";
-
-
-                lotButton.onclick = function () {
-
-                    showHousingUnitDetails(unit);
-
-                };
-
-
-                lotGrid.appendChild(lotButton);
-
-            });
-
-
-            blockCard.appendChild(lotGrid);
-
-            inventoryContainer.appendChild(
-                blockCard
-            );
+            return unit.project === projectName;
 
         });
+
+
+    if (housingData.length > 0) {
+
+        renderHousingInventory(
+            housingData,
+            container
+        );
 
     }
 
 
-    /* =====================================================
+    /* =====================================
        MIDDLE CONDO
-       ===================================================== */
+    ===================================== */
 
-    if (condo.length > 0) {
+    let condoData =
+        INVENTORY_DATA.middleCondo.filter(function(unit) {
 
-        const title =
-            document.createElement("h2");
+            return unit.project === projectName;
 
-        title.innerText = "MIDDLE CONDO";
-
-        title.style.marginTop = "30px";
-
-        inventoryContainer.appendChild(title);
+        });
 
 
-        const condoGrid =
+    if (condoData.length > 0) {
+
+        renderCondoInventory(
+            condoData,
+            container
+        );
+
+    }
+
+
+    /* =====================================
+       NO INVENTORY
+    ===================================== */
+
+    if (
+        housingData.length === 0 &&
+        condoData.length === 0
+    ) {
+
+        container.innerHTML = `
+            <div class="block-card">
+
+                <h3>No Available Inventory</h3>
+
+                <p>
+                    There are currently no available units
+                    for this project.
+                </p>
+
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* =========================================
+   RENDER MIDDLE HOUSING
+========================================= */
+
+function renderHousingInventory(data, container) {
+
+    const blocks = {};
+
+
+    /* GROUP BY BLOCK */
+
+    data.forEach(function(unit) {
+
+        if (!blocks[unit.block]) {
+
+            blocks[unit.block] = [];
+
+        }
+
+        blocks[unit.block].push(unit);
+
+    });
+
+
+    /* CREATE BLOCKS */
+
+    Object.keys(blocks).forEach(function(blockName) {
+
+        const blockCard =
             document.createElement("div");
 
-        condoGrid.className = "lot-grid";
+        blockCard.className = "block-card";
 
 
-        condo.forEach(function (unit) {
+        blockCard.innerHTML = `
 
-            const unitButton =
+            <h3>${blockName}</h3>
+
+            <div class="lot-grid"></div>
+
+        `;
+
+
+        const lotGrid =
+            blockCard.querySelector(".lot-grid");
+
+
+        blocks[blockName].forEach(function(unit) {
+
+            const lotButton =
                 document.createElement("button");
 
-            unitButton.type = "button";
+            lotButton.className = "lot";
 
-            unitButton.className = "lot";
-
-            unitButton.innerText =
-                unit.unitCode || "-";
+            lotButton.innerText =
+                unit.lot.replace("Lot ", "");
 
 
-            unitButton.onclick = function () {
+            lotButton.onclick = function() {
 
-                showCondoUnitDetails(unit);
+                showHousingDetails(unit);
 
             };
 
 
-            condoGrid.appendChild(unitButton);
+            lotGrid.appendChild(lotButton);
 
         });
 
 
-        inventoryContainer.appendChild(
-            condoGrid
-        );
+        container.appendChild(blockCard);
 
-    }
+    });
 
-
-    /* =====================================================
-       NO INVENTORY
-       ===================================================== */
-
-    if (
-        housing.length === 0 &&
-        condo.length === 0
-    ) {
-
-        const message =
-            document.createElement("p");
-
-        message.innerText =
-            "No available OPEN inventory for this project.";
-
-        message.style.padding = "20px";
-
-        inventoryContainer.appendChild(
-            message
-        );
-    }
 }
 
 
-/* =========================================================
+/* =========================================
+   RENDER MIDDLE CONDO
+========================================= */
+
+function renderCondoInventory(data, container) {
+
+    const condoCard =
+        document.createElement("div");
+
+    condoCard.className = "block-card";
+
+
+    condoCard.innerHTML = `
+
+        <h3>AVAILABLE UNITS</h3>
+
+        <div class="lot-grid"></div>
+
+    `;
+
+
+    const lotGrid =
+        condoCard.querySelector(".lot-grid");
+
+
+    data.forEach(function(unit) {
+
+        const unitButton =
+            document.createElement("button");
+
+        unitButton.className = "lot";
+
+        unitButton.innerText =
+            unit.unitCode;
+
+
+        unitButton.onclick = function() {
+
+            showCondoDetails(unit);
+
+        };
+
+
+        lotGrid.appendChild(unitButton);
+
+    });
+
+
+    container.appendChild(condoCard);
+
+}
+
+
+/* =========================================
    MIDDLE HOUSING DETAILS
-   ========================================================= */
+========================================= */
 
-function showHousingUnitDetails(unit) {
+function showHousingDetails(unit) {
 
-    setDetail(
-        "detailProject",
-        unit.project
-    );
+    document.getElementById("detailProject").innerText =
+        unit.project;
 
-    setDetail(
-        "detailLotAlias",
-        unit.lotAlias
-    );
+    document.getElementById("detailLotAlias").innerText =
+        unit.lotAlias;
 
-    setDetail(
-        "detailBlock",
-        unit.block
-    );
+    document.getElementById("detailBlock").innerText =
+        unit.block;
 
-    setDetail(
-        "detailLot",
-        unit.lot
-    );
+    document.getElementById("detailLot").innerText =
+        unit.lot;
 
-    setDetail(
-        "detailLotArea",
-        unit.lotArea + " sqm"
-    );
+    document.getElementById("detailLotArea").innerText =
+        unit.lotArea + " sqm";
 
-    setDetail(
-        "detailFloorArea",
-        unit.floorArea + " sqm"
-    );
+    document.getElementById("detailFloorArea").innerText =
+        unit.floorArea + " sqm";
 
-    setDetail(
-        "detailHouseModel",
-        unit.houseModel
-    );
+    document.getElementById("detailHouseModel").innerText =
+        unit.houseModel;
 
-    setDetail(
-        "detailPrice",
-        formatPrice(unit.grossContractPrice)
-    );
+    document.getElementById("detailPrice").innerText =
+        formatPrice(unit.grossContractPrice);
 
 
-    /* HIDE CONDO DETAILS */
+    document.getElementById("unitModal").style.display =
+        "flex";
 
-    hideElement("condoDetailSection");
-
-
-    /* SHOW HOUSING DETAILS */
-
-    showElement("housingDetailSection");
-
-
-    openUnitModal();
 }
 
 
-/* =========================================================
+/* =========================================
    MIDDLE CONDO DETAILS
-   ========================================================= */
+========================================= */
 
-function showCondoUnitDetails(unit) {
+function showCondoDetails(unit) {
 
-    setDetail(
-        "detailProject",
-        unit.project
-    );
+    document.getElementById("detailProject").innerText =
+        unit.project;
 
-    setDetail(
-        "detailLotAlias",
-        unit.lotAlias
-    );
+    document.getElementById("detailLotAlias").innerText =
+        unit.lotAlias;
 
-    setDetail(
-        "detailBuildingFloor",
-        unit.buildingFloor
-    );
+    document.getElementById("detailBlock").innerText =
+        unit.buildingFloor;
 
-    setDetail(
-        "detailUnitCode",
-        unit.unitCode
-    );
+    document.getElementById("detailLot").innerText =
+        unit.unitCode;
 
-    setDetail(
-        "detailFloorArea",
-        unit.floorArea + " sqm"
-    );
+    document.getElementById("detailLotArea").innerText =
+        "N/A";
 
-    setDetail(
-        "detailUnitModel",
-        unit.unitModel
-    );
+    document.getElementById("detailFloorArea").innerText =
+        unit.floorArea + " sqm";
 
-    setDetail(
-        "detailPrice",
-        formatPrice(unit.grossContractPrice)
-    );
+    document.getElementById("detailHouseModel").innerText =
+        unit.unitModel;
+
+    document.getElementById("detailPrice").innerText =
+        formatPrice(unit.grossContractPrice);
 
 
-    /* HIDE HOUSING DETAILS */
+    document.getElementById("unitModal").style.display =
+        "flex";
 
-    hideElement("housingDetailSection");
-
-
-    /* SHOW CONDO DETAILS */
-
-    showElement("condoDetailSection");
-
-
-    openUnitModal();
 }
 
 
-/* =========================================================
-   SET DETAIL VALUE
-   ========================================================= */
+/* =========================================
+   FORMAT PRICE
+========================================= */
 
-function setDetail(id, value) {
+function formatPrice(price) {
 
-    const element =
-        document.getElementById(id);
-
-    if (element) {
-
-        element.innerText =
-            value !== undefined &&
-            value !== null &&
-            value !== ""
-                ? value
-                : "-";
-    }
-}
-
-
-/* =========================================================
-   SHOW ELEMENT
-   ========================================================= */
-
-function showElement(id) {
-
-    const element =
-        document.getElementById(id);
-
-    if (element) {
-        element.style.display = "block";
-    }
-}
-
-
-/* =========================================================
-   HIDE ELEMENT
-   ========================================================= */
-
-function hideElement(id) {
-
-    const element =
-        document.getElementById(id);
-
-    if (element) {
-        element.style.display = "none";
-    }
-}
-
-
-/* =========================================================
-   OPEN UNIT MODAL
-   ========================================================= */
-
-function openUnitModal() {
-
-    const modal =
-        document.getElementById("unitModal");
-
-    if (modal) {
-
-        modal.style.display = "flex";
-
-    } else {
-
-        console.error(
-            "unitModal not found."
+    return "₱" +
+        Number(price).toLocaleString(
+            "en-PH",
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
         );
-    }
+
 }
 
 
-/* =========================================================
+/* =========================================
    CLOSE UNIT DETAILS
-   ========================================================= */
+========================================= */
 
 function closeUnitDetails() {
 
-    const modal =
-        document.getElementById("unitModal");
+    document.getElementById("unitModal").style.display =
+        "none";
 
-    if (modal) {
-        modal.style.display = "none";
-    }
 }
 
 
-/* =========================================================
+/* =========================================
    CLOSE WHEN CLICKING OUTSIDE
-   ========================================================= */
+========================================= */
 
 function closeOutside(event) {
 
-    const modal =
-        document.getElementById("unitModal");
-
     if (
-        modal &&
-        event.target === modal
+        event.target ===
+        document.getElementById("unitModal")
     ) {
 
         closeUnitDetails();
 
     }
+
 }
 
 
-/* =========================================================
+/* =========================================
    PAYMENT CALCULATOR
-   ========================================================= */
+========================================= */
 
 function openPaymentCalculator() {
 
@@ -578,76 +412,63 @@ function openPaymentCalculator() {
         "Next step: ikokonekta natin dito " +
         "ang actual Payment Calculator."
     );
+
 }
 
 
-/* =========================================================
+/* =========================================
    HOLD UNIT
-   ========================================================= */
+========================================= */
 
 function holdUnit() {
 
-    const project =
-        document.getElementById(
-            "detailProject"
-        )?.innerText || "-";
+    let project =
+        document.getElementById("detailProject").innerText;
 
+    let lotAlias =
+        document.getElementById("detailLotAlias").innerText;
 
-    const block =
-        document.getElementById(
-            "detailBlock"
-        )?.innerText || "-";
+    let block =
+        document.getElementById("detailBlock").innerText;
 
-
-    const lot =
-        document.getElementById(
-            "detailLot"
-        )?.innerText || "-";
-
-
-    const unitCode =
-        document.getElementById(
-            "detailUnitCode"
-        )?.innerText || "-";
+    let lot =
+        document.getElementById("detailLot").innerText;
 
 
     alert(
         "HOLD THIS UNIT\n\n" +
-        "Project: " + project +
-        "\nBlock: " + block +
-        "\nLot: " + lot +
-        "\nUnit Code: " + unitCode
+
+        "Project: " +
+        project +
+
+        "\nLot Alias: " +
+        lotAlias +
+
+        "\nBlock / Building: " +
+        block +
+
+        "\nLot / Unit: " +
+        lot
     );
+
 }
 
 
-/* =========================================================
-   PAGE LOAD
-   ========================================================= */
+/* =========================================
+   BACK TO PROJECTS
+========================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+function backToProjects() {
 
-        console.log(
-            "RLI Sellers Portal loaded."
-        );
+    document.getElementById("inventorySection").style.display =
+        "none";
 
-        if (
-            typeof INVENTORY_DATA !==
-            "undefined"
-        ) {
+    document.getElementById("projectsSection").style.display =
+        "block";
 
-            console.log(
-                "Inventory data loaded."
-            );
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
-        } else {
-
-            console.error(
-                "inventory-data.js was not loaded."
-            );
-        }
-
-    }
-);
+}
