@@ -1,4 +1,6 @@
-<!-- UNIT DETAILS POPUP -->
+<!-- =========================================
+     UNIT DETAILS MODAL
+========================================= -->
 
 <div id="unitModal"
      class="modal"
@@ -11,11 +13,18 @@
             &times;
         </span>
 
-        <h2>UNIT DETAILS</h2>
+
+        <h2>
+            UNIT DETAILS
+        </h2>
+
 
         <div class="unit-info">
 
-            <!-- MIDDLE HOUSING -->
+
+            <!-- =================================
+                 MIDDLE HOUSING
+            ================================== -->
 
             <div id="housingDetails">
 
@@ -62,9 +71,12 @@
             </div>
 
 
-            <!-- MIDDLE CONDO -->
+            <!-- =================================
+                 MIDDLE CONDO
+            ================================== -->
 
-            <div id="condoDetails" style="display:none;">
+            <div id="condoDetails"
+                 style="display:none;">
 
                 <p>
                     <strong>Project:</strong>
@@ -103,33 +115,38 @@
 
             </div>
 
+
         </div>
 
+
+        <!-- =================================
+             POPUP BUTTONS
+        ================================== -->
 
         <div class="modal-buttons">
 
-            <button class="payment-button"
-                    onclick="openPaymentCalculator()">
+            <button
+                type="button"
+                class="payment-button"
+                onclick="openPaymentCalculator()">
+
                 PAYMENT CALCULATOR
+
             </button>
 
-            <button class="hold-button"
-                    onclick="holdUnit()">
+
+            <button
+                type="button"
+                class="hold-button"
+                onclick="holdUnit()">
+
                 HOLD THIS UNIT
+
             </button>
 
         </div>
+
 
     </div>
 
 </div>
-
-
-<!-- INVENTORY DATA FIRST -->
-<script src="inventory-data.js"></script>
-
-<!-- MAIN JAVASCRIPT -->
-<script src="script.js"></script>
-
-</body>
-</html>
