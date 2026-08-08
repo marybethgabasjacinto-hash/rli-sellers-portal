@@ -1,6 +1,5 @@
 /* =========================================
    RLI SELLERS PORTAL
-   MAIN STYLE
 ========================================= */
 
 * {
@@ -15,6 +14,7 @@ body {
     color: #172033;
 }
 
+
 /* =========================================
    HEADER
 ========================================= */
@@ -23,7 +23,7 @@ header {
     background: #172033;
     color: white;
     padding: 28px 40px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
 }
 
 header h1 {
@@ -36,8 +36,9 @@ header p {
     color: #dbe4f0;
 }
 
+
 /* =========================================
-   MAIN CONTAINER
+   CONTAINER
 ========================================= */
 
 .container {
@@ -45,6 +46,7 @@ header p {
     margin: 45px auto;
     padding: 0 25px;
 }
+
 
 /* =========================================
    WELCOME
@@ -64,32 +66,133 @@ header p {
     font-size: 17px;
 }
 
+
 /* =========================================
-   PROJECT SECTION
+   PRODUCT TYPE
 ========================================= */
 
-.project-section {
-    margin-bottom: 45px;
+.product-section {
+    margin-bottom: 40px;
 }
 
 .section-title {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #172033;
 }
 
+
 /* =========================================
-   HORIZONTAL PROJECT ROW
+   MIDDLE HOUSING / MIDDLE CONDO
+   HORIZONTAL
+========================================= */
+
+.category-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 5px 5px 18px;
+}
+
+
+/* =========================================
+   CATEGORY CARD
+========================================= */
+
+.category-card {
+    flex: 0 0 270px;
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    border: 1px solid #e2e8f0;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+
+    transition: all 0.25s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+
+    border-color: #2563eb;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.13);
+}
+
+
+/* =========================================
+   CATEGORY ICON
+========================================= */
+
+.category-icon {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 16px;
+
+    background: #172033;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 36px;
+}
+
+.category-icon.condo {
+    background: #2563eb;
+}
+
+
+.category-card h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.category-card p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   PROJECT SECTION
+========================================= */
+
+.project-section {
+    margin-bottom: 40px;
+}
+
+
+/* =========================================
+   PROJECTS HORIZONTAL
 ========================================= */
 
 .project-row {
     display: flex;
-    gap: 18px;
-    overflow-x: auto;
-    padding: 5px 5px 18px 5px;
 
-    scrollbar-width: thin;
+    gap: 18px;
+
+    flex-wrap: nowrap;
+
+    overflow-x: auto;
+
+    padding: 5px 5px 18px;
 }
+
 
 /* =========================================
    PROJECT CARD
@@ -110,7 +213,7 @@ header p {
 
     border: 1px solid #e2e8f0;
 
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
 
     cursor: pointer;
 
@@ -120,10 +223,11 @@ header p {
 .project-card:hover {
     transform: translateY(-5px);
 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.13);
-
     border-color: #2563eb;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.13);
 }
+
 
 /* =========================================
    PROJECT ICON
@@ -148,15 +252,10 @@ header p {
     font-size: 30px;
 }
 
-/* CONDO ICON */
-
-.condo-icon {
+.project-icon.condo {
     background: #2563eb;
 }
 
-/* =========================================
-   PROJECT NAME
-========================================= */
 
 .project-card h3 {
     font-size: 16px;
@@ -172,10 +271,6 @@ header p {
     font-size: 13px;
 }
 
-/* =========================================
-   PROJECT CODE
-========================================= */
-
 .project-code {
     display: block;
 
@@ -188,11 +283,42 @@ header p {
     margin-bottom: 6px;
 }
 
+
 /* =========================================
-   CARD
+   INVENTORY
 ========================================= */
 
-.card {
+.inventory-section {
+    margin-top: 35px;
+}
+
+.project-header {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 16px;
+
+    margin-bottom: 25px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+}
+
+.project-header h2 {
+    font-size: 28px;
+}
+
+.project-header p {
+    color: #64748b;
+    margin-top: 7px;
+}
+
+
+/* =========================================
+   BLOCK
+========================================= */
+
+.block-card {
     background: white;
 
     border-radius: 16px;
@@ -201,11 +327,18 @@ header p {
 
     margin-bottom: 25px;
 
-    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.06);
 }
 
+.block-card h3 {
+    font-size: 24px;
+
+    margin-bottom: 20px;
+}
+
+
 /* =========================================
-   LOT GRID
+   LOTS - ORANGE
 ========================================= */
 
 .lot-grid {
@@ -215,10 +348,6 @@ header p {
 
     gap: 12px;
 }
-
-/* =========================================
-   LOT BOXES - ORANGE
-========================================= */
 
 .lot {
     background: #f97316;
@@ -241,107 +370,51 @@ header p {
 
     transition: all 0.2s ease;
 
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
 }
 
 .lot:hover {
     background: #ea580c;
 
     transform: translateY(-3px);
-
-    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.18);
 }
 
 .lot:active {
     transform: scale(0.96);
 }
 
-/* =========================================
-   BUTTONS
-========================================= */
-
-button {
-    font-family: inherit;
-}
-
-.primary,
-.secondary,
-.hold-button {
-    border-radius: 9px;
-
-    padding: 13px 22px;
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition: 0.2s ease;
-}
 
 /* =========================================
-   PAYMENT CALCULATOR - BLUE
+   BACK BUTTON
 ========================================= */
 
-.primary {
-    background: #2563eb;
+.back-button {
+    margin-top: 5px;
 
-    color: white;
+    padding: 12px 22px;
 
-    border: none;
-}
+    border-radius: 8px;
 
-.primary:hover {
-    background: #1d4ed8;
-}
+    border: 2px solid #2563eb;
 
-/* =========================================
-   SECONDARY
-========================================= */
-
-.secondary {
     background: white;
 
     color: #2563eb;
 
-    border: 1px solid #2563eb;
+    font-weight: bold;
+
+    cursor: pointer;
 }
 
-.secondary:hover {
-    background: #eff6ff;
-}
-
-/* =========================================
-   HOLD THIS UNIT - BLACK
-========================================= */
-
-.hold-button {
-    background: #111111;
+.back-button:hover {
+    background: #2563eb;
 
     color: white;
-
-    border: none;
 }
 
-.hold-button:hover {
-    background: #333333;
-}
 
 /* =========================================
-   ACTIONS
-========================================= */
-
-.actions {
-    display: flex;
-
-    gap: 15px;
-
-    margin-top: 25px;
-}
-
-/* =========================================
-   MODAL BACKGROUND
+   MODAL
 ========================================= */
 
 .modal {
@@ -349,17 +422,15 @@ button {
 
     position: fixed;
 
-    z-index: 1000;
+    z-index: 9999;
 
     left: 0;
-
     top: 0;
 
     width: 100%;
-
     height: 100%;
 
-    background: rgba(15, 23, 42, 0.65);
+    background: rgba(15,23,42,0.65);
 
     align-items: center;
 
@@ -368,16 +439,12 @@ button {
     padding: 20px;
 }
 
-/* =========================================
-   UNIT DETAILS POPUP
-========================================= */
-
 .modal-content {
     background: white;
 
     width: 100%;
 
-    max-width: 480px;
+    max-width: 500px;
 
     border-radius: 18px;
 
@@ -385,70 +452,20 @@ button {
 
     position: relative;
 
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-
-    animation: popup 0.2s ease;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
-
-@keyframes popup {
-
-    from {
-        opacity: 0;
-
-        transform: scale(0.95);
-    }
-
-    to {
-        opacity: 1;
-
-        transform: scale(1);
-    }
-}
-
-/* =========================================
-   POPUP TITLE
-========================================= */
 
 .modal-content h2 {
-    color: #172033;
-
-    font-size: 25px;
-
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
-
-/* =========================================
-   POPUP DETAILS
-========================================= */
-
-.modal-content p {
-    margin-bottom: 10px;
-
-    font-size: 16px;
-
-    color: #475569;
-}
-
-.modal-content p span {
-    color: #172033;
-
-    font-weight: 700;
-}
-
-/* =========================================
-   CLOSE BUTTON
-========================================= */
 
 .close {
     position: absolute;
 
     right: 20px;
-
-    top: 15px;
+    top: 12px;
 
     font-size: 30px;
-
-    font-weight: 700;
 
     color: #64748b;
 
@@ -459,16 +476,91 @@ button {
     color: #ef4444;
 }
 
+
+/* =========================================
+   UNIT INFO
+========================================= */
+
+.unit-info {
+    border-top: 1px solid #e5e7eb;
+
+    padding-top: 15px;
+}
+
+.unit-info p {
+    margin-bottom: 11px;
+
+    font-size: 16px;
+
+    color: #475569;
+}
+
+.unit-info strong {
+    display: inline-block;
+
+    width: 120px;
+
+    color: #172033;
+}
+
+
 /* =========================================
    POPUP BUTTONS
 ========================================= */
 
-.modal-content .primary,
-.modal-content .hold-button {
-    width: 100%;
+.modal-buttons {
+    display: flex;
 
-    margin-top: 10px;
+    gap: 12px;
+
+    margin-top: 25px;
 }
+
+.payment-button {
+    flex: 1;
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.payment-button:hover {
+    background: #1d4ed8;
+}
+
+
+.hold-button {
+    flex: 1;
+
+    background: #111111;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.hold-button:hover {
+    background: #333333;
+}
+
 
 /* =========================================
    MOBILE
@@ -486,7 +578,6 @@ button {
 
     .container {
         margin: 30px auto;
-
         padding: 0 18px;
     }
 
@@ -494,23 +585,20 @@ button {
         font-size: 26px;
     }
 
-    .project-row {
-        gap: 12px;
+    .category-card {
+        flex: 0 0 230px;
     }
 
     .project-card {
-        flex: 0 0 180px;
-
-        min-height: 165px;
+        flex: 0 0 190px;
     }
 
     .lot {
         width: 62px;
-
         height: 62px;
     }
 
-    .modal-content {
-        padding: 25px;
+    .modal-buttons {
+        flex-direction: column;
     }
 }
