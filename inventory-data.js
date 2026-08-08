@@ -1,6 +1,11 @@
 const INVENTORY_DATA = {
 
+    // =========================================
+    // MIDDLE HOUSING
+    // =========================================
+
     middleHousing: [
+
         {
             project: "AGAPEYA EAST",
             lotAlias: "AGM-02-052-001",
@@ -21,12 +26,28 @@ const INVENTORY_DATA = {
             floorArea: 50,
             houseModel: "Duplex - PREMIUM",
             grossContractPrice: 3820000
+        },
+
+        {
+            project: "AGAPEYA EAST",
+            lotAlias: "AGM-02-052-003",
+            block: "Block 52",
+            lot: "Lot 03",
+            lotArea: 100,
+            floorArea: 50,
+            houseModel: "Duplex - PREMIUM",
+            grossContractPrice: 3490000
         }
 
-        // ...actual OPEN inventory continues
     ],
 
+
+    // =========================================
+    // MIDDLE CONDO
+    // =========================================
+
     middleCondo: [
+
         {
             project: "Terraces at Tradizo Enclave",
             lotAlias: "TER-TE-A01-001",
@@ -47,7 +68,6 @@ const INVENTORY_DATA = {
             grossContractPrice: 1010000
         }
 
-        // ...actual OPEN condo inventory continues
     ]
 
 };
