@@ -1,66 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>RLI Sellers Portal</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
+
 <header>
+
     <h1>RLI Sellers Portal</h1>
+
     <p>Real-time Sales & Inventory Portal</p>
+
 </header>
+
 
 <main class="container">
 
+
+    <!-- WELCOME -->
+
     <section class="welcome">
+
         <h2>Welcome, Seller!</h2>
-        <p>Select a project to view available inventory.</p>
-    </section>
 
-    <!-- PROJECTS -->
-    <section class="projects">
-
-        <div class="project-card" onclick="openProject('AGAPEYA EAST')">
-            <div class="project-icon">🏠</div>
-            <h3>AGAPEYA EAST</h3>
-            <p>View Inventory</p>
-        </div>
-
-        <div class="project-card" onclick="openProject('VALENZIA ENCLAVE EAST')">
-            <div class="project-icon">🏠</div>
-            <h3>VALENZIA ENCLAVE EAST</h3>
-            <p>View Inventory</p>
-        </div>
-
-        <div class="project-card" onclick="openProject('AGAPEYA WEST')">
-            <div class="project-icon">🏠</div>
-            <h3>AGAPEYA WEST</h3>
-            <p>View Inventory</p>
-        </div>
-
-        <div class="project-card" onclick="openProject('ESTANZIA ENCLAVE EAST')">
-            <div class="project-icon">🏠</div>
-            <h3>ESTANZIA ENCLAVE EAST</h3>
-            <p>View Inventory</p>
-        </div>
-
-        <div class="project-card" onclick="openProject('THE PENTHOUSE AT JEN')">
-            <div class="project-icon">🏠</div>
-            <h3>THE PENTHOUSE AT JEN</h3>
-            <p>View Inventory</p>
-        </div>
+        <p>
+            Select a project to view available inventory.
+        </p>
 
     </section>
+
+
+    <!-- =========================
+         HOUSE & LOT
+    ========================== -->
+
+    <section class="project-section">
+
+        <h2 class="section-title">
+            HOUSE & LOT
+        </h2>
+
+
+        <div class="project-row">
+
+
+            <!-- AGAPEYA EAST -->
+
+            <div class="project-card"
+                 onclick="openProject('AGAPEYA EAST')">
+
+                <div class="project-icon">
+                    🏠
+                </div>
+
+                <h3>
+                    AGAPEYA EAST
+                </h3>
+
+                <p>
+                    View Inventory
+                </p>
+
+            </div>
+
+
+            <!-- VALENZIA -->
+
+            <div class="project-card"
+                 onclick="openProject('VALENZIA ENCLAVE EAST')">
+
+                <div class="project-icon">
+                    🏠
+                </div>
+
+                <h3>
+                    VALENZIA ENCLAVE EAST
+                </h3>
+
+                <p>
+                    View Inventory
+                </p>
+
+            </div>
+
+
+            <!-- AGAPEYA WEST -->
+
+            <div class="project-card"
+                 onclick="openProject('AGAPEYA WEST')">
+
+                <div class="project-icon">
+                    🏠
+                </div>
+
+                <h3>
+                    AGAPEYA WEST
+                </h3>
+
+                <p>
+                    View Inventory
+                </p>
+
+            </div>
+
+
+            <!-- ESTANZIA -->
+
+            <div class="project-card"
+                 onclick="openProject('ESTANZIA ENCLAVE EAST')">
+
+                <div class="project-icon">
+                    🏠
+                </div>
+
+                <h3>
+                    ESTANZIA ENCLAVE EAST
+                </h3>
+
+                <p>
+                    View Inventory
+                </p>
+
+            </div>
+
+
+            <!-- PENTHOUSE -->
+
+            <div class="project-card"
+                 onclick="openProject('THE PENTHOUSE AT JEN')">
+
+                <div class="project-icon">
+                    🏠
+                </div>
+
+                <h3>
+                    THE PENTHOUSE AT JEN
+                </h3>
+
+                <p>
+                    View Inventory
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONDO
+    ========================== -->
+
+    <section class="project-section condo-section">
+
+        <h2 class="section-title">
+            CONDO
+        </h2>
+
+
+        <div class="project-row">
+
+
+            <!-- TERRACES AT JUBILATION -->
+
+            <div class="project-card"
+                 onclick="openProject('Terraces at Jubilation (Ter-Je)')">
+
+                <div class="project-icon condo-icon">
+                    🏢
+                </div>
+
+                <h3>
+                    Terraces at Jubilation
+                </h3>
+
+                <span class="project-code">
+                    Ter-Je
+                </span>
+
+                <p>
+                    View Inventory
+                </p>
+
+            </div>
+
+
+            <!-- TERRACES AT TRADIZO -->
+
+            <div class="project-card"
+                 onclick="openProject('Terraces at Tradizo (Ter-Te)')">
+
+                <div class="project-icon condo-icon">
+                    🏢
+                </div>
+
+                <h3>
+                    Terraces at Tradizo
+                </h3>
+
+                <span class="project-code">
+                    Ter-Te
+                </span>
+
+                <p>
+                    View Inventory
+                </p>
+
+            </div>
+
+
+            <!-- ZAYA -->
+
+            <div class="project-card"
+                 onclick="openProject('Zaya')">
+
+                <div class="project-icon condo-icon">
+                    🏢
+                </div>
+
+                <h3>
+                    Zaya
+                </h3>
+
+                <p>
+                    View Inventory
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
 
 </main>
 
+
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
