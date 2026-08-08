@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RLI Inventory</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>RLI Sellers Portal</h1>
+        <p>Real-time Sales & Inventory</p>
+    </header>
+
+    <main class="container">
+
+        <section class="welcome">
+            <h2>Inventory</h2>
+            <p>Select a project and choose an available unit.</p>
+        </section>
+
+        <section class="card">
+
+            <h3>PROJECT</h3>
+
+            <select id="projectSelect">
+                <option value="">Select Project</option>
+                <option value="AGAPEYA">AGAPEYA</option>
+                <option value="VALENZIA">VALENZIA ENCLAVE EAST</option>
+                <option value="AGAPEYA WEST">AGAPEYA WEST</option>
+                <option value="ESTANZIA">ESTANZIA ENCLAVE EAST</option>
+                <option value="THE PENTHOUSE AT JEN">THE PENTHOUSE AT JEN</option>
+            </select>
+
+        </section>
+
+        <section class="card">
+
+            <h2>BLOCK 1</h2>
+
+            <div class="lot-grid">
+
+                <button class="lot" onclick="showUnitDetails(1)">1</button>
+                <button class="lot" onclick="showUnitDetails(2)">2</button>
+                <button class="lot" onclick="showUnitDetails(3)">3</button>
+                <button class="lot" onclick="showUnitDetails(4)">4</button>
+                <button class="lot" onclick="showUnitDetails(5)">5</button>
+                <button class="lot" onclick="showUnitDetails(6)">6</button>
+                <button class="lot" onclick="showUnitDetails(7)">7</button>
+                <button class="lot" onclick="showUnitDetails(8)">8</button>
+                <button class="lot" onclick="showUnitDetails(9)">9</button>
+                <button class="lot" onclick="showUnitDetails(10)">10</button>
+
+            </div>
+
+        </section>
+
+        <button class="secondary" onclick="goBack()">
+            Back to Dashboard
+        </button>
+
+    </main>
+
+
+    <!-- UNIT DETAILS POPUP -->
+
+    <div id="unitModal" class="modal">
+
+        <div class="modal-content">
+
+            <span class="close" onclick="closeUnitDetails()">&times;</span>
+
+            <h2>UNIT DETAILS</h2>
+
+            <div class="details">
+
+                <p><strong>Project:</strong> <span id="detailProject">AGAPEYA</span></p>
+
+                <p><strong>Block:</strong> <span id="detailBlock">1</span></p>
+
+                <p><strong>Lot:</strong> <span id="detailLot">3</span></p>
+
+                <p><strong>Lot Area:</strong> <span id="detailLotArea">100 sqm</span></p>
+
+                <p><strong>Floor Area:</strong> <span id="detailFloorArea">50 sqm</span></p>
+
+                <p><strong>House Model:</strong> <span id="detailHouseModel">Model A</span></p>
+
+                <p><strong>Price:</strong> <span id="detailPrice">₱3,500,000</span></p>
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button class="primary">
+                    PAYMENT CALCULATOR
+                </button>
+
+                <button class="hold-button">
+                    HOLD THIS UNIT
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function showUnitDetails(lotNumber) {
+
+            document.getElementById("detailLot").textContent = lotNumber;
+
+            document.getElementById("unitModal").style.display = "flex";
+
+        }
+
+
+        function closeUnitDetails() {
+
+            document.getElementById("unitModal").style.display = "none";
+
+        }
+
+
+        function goBack() {
+
+            window.location.href = "index.html";
+
+        }
+
+
+        window.onclick = function(event) {
+
+            const modal = document.getElementById("unitModal");
+
+            if (event.target === modal) {
+
+                modal.style.display = "none";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
