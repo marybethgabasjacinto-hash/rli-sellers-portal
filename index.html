@@ -4,61 +4,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>RLI Sellers Portal</title>
-
+    <title>RLI Inventory</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>RLI Sellers Portal</h1>
-        <p>Real-time Sales & Inventory Portal</p>
-    </header>
+<header>
+    <h1>RLI Sellers Portal</h1>
+    <p>Real-time Sales & Inventory</p>
+</header>
 
-    <main class="container">
+<main class="container">
 
-        <section class="welcome">
-            <h2>Welcome, Seller!</h2>
-            <p>Manage your projects and check inventory.</p>
-        </section>
+    <section class="welcome">
+        <h2>Inventory</h2>
+        <p>Select an available unit.</p>
+    </section>
 
-        <section class="cards">
+    <section class="card">
 
-            <div class="card">
-                <h3>PROJECTS</h3>
-                <div class="number">5</div>
-            </div>
+        <h2>BLOCK 1</h2>
 
-            <div class="card">
-                <h3>AVAILABLE UNITS</h3>
-                <div class="number">128</div>
-            </div>
+        <div class="lot-grid">
 
-            <div class="card">
-                <h3>MY HOLDS</h3>
-                <div class="number">12</div>
-            </div>
+            <button type="button" class="lot" onclick="showUnitDetails(1)">1</button>
+            <button type="button" class="lot" onclick="showUnitDetails(2)">2</button>
+            <button type="button" class="lot" onclick="showUnitDetails(3)">3</button>
+            <button type="button" class="lot" onclick="showUnitDetails(4)">4</button>
+            <button type="button" class="lot" onclick="showUnitDetails(5)">5</button>
+            <button type="button" class="lot" onclick="showUnitDetails(6)">6</button>
+            <button type="button" class="lot" onclick="showUnitDetails(7)">7</button>
+            <button type="button" class="lot" onclick="showUnitDetails(8)">8</button>
+            <button type="button" class="lot" onclick="showUnitDetails(9)">9</button>
+            <button type="button" class="lot" onclick="showUnitDetails(10)">10</button>
 
-        </section>
+        </div>
 
-        <section class="actions">
+    </section>
 
-            <button class="primary" onclick="checkInventory()">
-                Check Inventory
-            </button>
+    <button type="button" class="secondary" onclick="goBack()">
+        Back to Dashboard
+    </button>
 
-            <button class="secondary">
-                Payment Calculator
-            </button>
+</main>
 
-        </section>
 
-    </main>
+<!-- UNIT DETAILS -->
 
-    <script src="script.js"></script>
+<div id="unitModal" class="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeUnitDetails()">&times;</span>
+
+        <h2>UNIT DETAILS</h2>
+
+        <p>Project: <span id="detailProject">AGAPEYA</span></p>
+        <p>Block: <span id="detailBlock">1</span></p>
+        <p>Lot: <span id="detailLot">3</span></p>
+        <p>Lot Area: <span id="detailLotArea">100 sqm</span></p>
+        <p>Floor Area: <span id="detailFloorArea">50 sqm</span></p>
+        <p>House Model: <span id="detailHouseModel">Model A</span></p>
+        <p>Price: <span id="detailPrice">₱3,500,000</span></p>
+
+        <br>
+
+        <button type="button" class="primary">
+            PAYMENT CALCULATOR
+        </button>
+
+        <button type="button" class="hold-button">
+            HOLD THIS UNIT
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function showUnitDetails(lotNumber) {
+
+    document.getElementById("detailLot").textContent = lotNumber;
+
+    document.getElementById("unitModal").style.display = "flex";
+
+}
+
+function closeUnitDetails() {
+
+    document.getElementById("unitModal").style.display = "none";
+
+}
+
+function goBack() {
+
+    window.location.href = "index.html";
+
+}
+
+</script>
 
 </body>
-
 </html>
