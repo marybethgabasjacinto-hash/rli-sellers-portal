@@ -1,3 +1,3 @@
 function checkInventory() {
-    alert("Inventory page coming soon!");
+    window.location.href = "inventory.html";
 }
