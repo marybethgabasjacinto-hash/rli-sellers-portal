@@ -1,117 +1,183 @@
-/* ============================= */
-/* UNIT DETAILS */
-/* ============================= */
+/* =========================================
+   SHOW MIDDLE HOUSING
+========================================= */
 
-function showUnitDetails(lotNumber) {
+function showHousing() {
 
-    // GET PROJECT
-    const projectSelect = document.getElementById("projectSelect");
+    document.getElementById("housingSection").style.display = "block";
 
-    let project = projectSelect.value;
+    document.getElementById("condoSection").style.display = "none";
 
-    // DEFAULT PROJECT
-    if (project === "") {
-        project = "AGAPEYA";
-    }
+    document.getElementById("inventorySection").style.display = "none";
 
-
-    // UPDATE DETAILS
-
-    document.getElementById("detailProject").textContent = project;
-
-    document.getElementById("detailBlock").textContent = "1";
-
-    document.getElementById("detailLot").textContent = lotNumber;
-
-    document.getElementById("detailLotArea").textContent = "100 sqm";
-
-    document.getElementById("detailFloorArea").textContent = "50 sqm";
-
-    document.getElementById("detailHouseModel").textContent = "Model A";
-
-    document.getElementById("detailPrice").textContent = "₱3,500,000";
-
-
-    // SHOW POPUP
-
-    const modal = document.getElementById("unitModal");
-
-    modal.style.display = "flex";
-
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
-/* ============================= */
-/* CLOSE POPUP */
-/* ============================= */
+/* =========================================
+   SHOW MIDDLE CONDO
+========================================= */
+
+function showCondo() {
+
+    document.getElementById("housingSection").style.display = "none";
+
+    document.getElementById("condoSection").style.display = "block";
+
+    document.getElementById("inventorySection").style.display = "none";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =========================================
+   OPEN PROJECT
+========================================= */
+
+function openProject(projectName) {
+
+    document.getElementById("housingSection").style.display = "none";
+
+    document.getElementById("condoSection").style.display = "none";
+
+    document.getElementById("inventorySection").style.display = "block";
+
+    document.getElementById("selectedProject").innerText = projectName;
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =========================================
+   BACK TO PROJECTS
+========================================= */
+
+function backToProjects() {
+
+    document.getElementById("inventorySection").style.display = "none";
+
+    document.getElementById("housingSection").style.display = "none";
+
+    document.getElementById("condoSection").style.display = "none";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =========================================
+   UNIT DETAILS
+========================================= */
+
+function showUnitDetails(block, lot) {
+
+    let project =
+        document.getElementById("selectedProject").innerText;
+
+
+    document.getElementById("detailProject").innerText =
+        project;
+
+
+    document.getElementById("detailBlock").innerText =
+        block;
+
+
+    document.getElementById("detailLot").innerText =
+        lot;
+
+
+    document.getElementById("detailLotArea").innerText =
+        "100 sqm";
+
+
+    document.getElementById("detailFloorArea").innerText =
+        "50 sqm";
+
+
+    document.getElementById("detailHouseModel").innerText =
+        "Model A";
+
+
+    document.getElementById("detailPrice").innerText =
+        "₱3,500,000";
+
+
+    document.getElementById("unitModal").style.display =
+        "flex";
+}
+
+
+/* =========================================
+   CLOSE UNIT DETAILS
+========================================= */
 
 function closeUnitDetails() {
 
-    document.getElementById("unitModal").style.display = "none";
-
+    document.getElementById("unitModal").style.display =
+        "none";
 }
 
 
-/* ============================= */
-/* CLOSE WHEN CLICKING OUTSIDE */
-/* ============================= */
+/* =========================================
+   CLOSE WHEN CLICKING OUTSIDE
+========================================= */
 
-window.onclick = function(event) {
+function closeOutside(event) {
 
-    const modal = document.getElementById("unitModal");
-
-    if (event.target === modal) {
+    if (event.target ===
+        document.getElementById("unitModal")) {
 
         closeUnitDetails();
-
     }
+}
 
-};
 
-
-/* ============================= */
-/* PAYMENT CALCULATOR */
-/* ============================= */
+/* =========================================
+   PAYMENT CALCULATOR
+========================================= */
 
 function openPaymentCalculator() {
 
     alert(
         "Payment Calculator\n\n" +
-        "We will build the Bank / PAG-IBIG calculator here next."
+        "Next step: ikokonekta natin dito " +
+        "ang actual Payment Calculator."
     );
-
 }
 
 
-/* ============================= */
-/* HOLD UNIT */
-/* ============================= */
+/* =========================================
+   HOLD UNIT
+========================================= */
 
 function holdUnit() {
 
-    const lot =
-        document.getElementById("detailLot").textContent;
+    let project =
+        document.getElementById("detailProject").innerText;
 
-    const project =
-        document.getElementById("detailProject").textContent;
+    let block =
+        document.getElementById("detailBlock").innerText;
+
+    let lot =
+        document.getElementById("detailLot").innerText;
+
 
     alert(
-        "HOLD REQUEST\n\n" +
-        "Project: " + project + "\n" +
-        "Block: 1\n" +
-        "Lot: " + lot + "\n\n" +
-        "Hold request will be processed here."
+        "HOLD THIS UNIT\n\n" +
+        "Project: " + project +
+        "\nBlock: " + block +
+        "\nLot: " + lot
     );
-
-}
-
-
-/* ============================= */
-/* BACK TO DASHBOARD */
-/* ============================= */
-
-function goBack() {
-
-    window.location.href = "index.html";
-
 }
