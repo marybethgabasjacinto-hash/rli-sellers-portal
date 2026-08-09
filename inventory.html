@@ -1,152 +1,578 @@
-<!-- =========================================
-     UNIT DETAILS MODAL
-========================================= -->
+<!DOCTYPE html>
+<html lang="en">
 
-<div id="unitModal"
-     class="modal"
-     onclick="closeOutside(event)">
+<head>
 
-    <div class="modal-content">
+    <meta charset="UTF-8">
 
-        <span class="close"
-              onclick="closeUnitDetails()">
-            &times;
-        </span>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>RLI Sellers Portal</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+<body>
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header>
+
+        <h1>
+            RLI Sellers Portal
+        </h1>
+
+        <p>
+            Real-time Sales & Inventory Portal
+        </p>
+
+    </header>
 
 
-        <h2>
-            UNIT DETAILS
-        </h2>
+    <main class="container">
 
 
-        <div class="unit-info">
+        <!-- =========================================
+             WELCOME
+        ========================================== -->
+
+        <section class="welcome">
+
+            <h2>
+                Welcome, Seller!
+            </h2>
+
+            <p>
+                Select a product type to continue.
+            </p>
+
+        </section>
 
 
-            <!-- =================================
-                 MIDDLE HOUSING
-            ================================== -->
+        <!-- =========================================
+             PRODUCT TYPE
+        ========================================== -->
 
-            <div id="housingDetails">
+        <section class="product-section">
 
-                <p>
-                    <strong>Project:</strong>
-                    <span id="detailProject"></span>
-                </p>
+            <h2 class="section-title">
+                PRODUCT TYPE
+            </h2>
 
-                <p>
-                    <strong>Lot Alias:</strong>
-                    <span id="detailLotAlias"></span>
-                </p>
 
-                <p>
-                    <strong>Block:</strong>
-                    <span id="detailBlock"></span>
-                </p>
+            <div class="category-row">
 
-                <p>
-                    <strong>Lot:</strong>
-                    <span id="detailLot"></span>
-                </p>
 
-                <p>
-                    <strong>Lot Area:</strong>
-                    <span id="detailLotArea"></span>
-                </p>
+                <!-- MIDDLE HOUSING -->
 
-                <p>
-                    <strong>Floor Area:</strong>
-                    <span id="detailFloorArea"></span>
-                </p>
+                <div class="category-card"
+                     onclick="showHousing()">
 
-                <p>
-                    <strong>House Model:</strong>
-                    <span id="detailHouseModel"></span>
-                </p>
+                    <div class="category-icon">
+                        🏠
+                    </div>
 
-                <p>
-                    <strong>Gross Contract Price:</strong>
-                    <span id="detailPrice"></span>
-                </p>
+                    <h3>
+                        Middle Housing
+                    </h3>
+
+                    <p>
+                        View House & Lot Projects
+                    </p>
+
+                </div>
+
+
+                <!-- MIDDLE CONDO -->
+
+                <div class="category-card"
+                     onclick="showCondo()">
+
+                    <div class="category-icon condo">
+                        🏢
+                    </div>
+
+                    <h3>
+                        Middle Condo
+                    </h3>
+
+                    <p>
+                        View Condo Projects
+                    </p>
+
+                </div>
+
 
             </div>
 
+        </section>
 
-            <!-- =================================
-                 MIDDLE CONDO
-            ================================== -->
 
-            <div id="condoDetails"
+        <!-- =========================================
+             MIDDLE HOUSING PROJECTS
+        ========================================== -->
+
+        <section id="housingSection"
+                 class="project-section"
                  style="display:none;">
 
-                <p>
-                    <strong>Project:</strong>
-                    <span id="condoProject"></span>
-                </p>
+            <h2 class="section-title">
+                MIDDLE HOUSING
+            </h2>
+
+
+            <div class="project-row">
+
+
+                <!-- AGAPEYA EAST -->
+
+                <div class="project-card"
+                     onclick="openProject('AGAPEYA EAST')">
+
+                    <div class="project-icon">
+                        🏠
+                    </div>
+
+                    <h3>
+                        AGAPEYA EAST
+                    </h3>
+
+                    <p>
+                        View Inventory
+                    </p>
+
+                </div>
+
+
+                <!-- VALENZIA ENCLAVE EAST -->
+
+                <div class="project-card"
+                     onclick="openProject('VALENZIA ENCLAVE EAST')">
+
+                    <div class="project-icon">
+                        🏠
+                    </div>
+
+                    <h3>
+                        VALENZIA ENCLAVE EAST
+                    </h3>
+
+                    <p>
+                        View Inventory
+                    </p>
+
+                </div>
+
+
+                <!-- AGAPEYA WEST -->
+
+                <div class="project-card"
+                     onclick="openProject('AGAPEYA WEST')">
+
+                    <div class="project-icon">
+                        🏠
+                    </div>
+
+                    <h3>
+                        AGAPEYA WEST
+                    </h3>
+
+                    <p>
+                        View Inventory
+                    </p>
+
+                </div>
+
+
+                <!-- ESTANZIA ENCLAVE EAST -->
+
+                <div class="project-card"
+                     onclick="openProject('ESTANZIA ENCLAVE EAST')">
+
+                    <div class="project-icon">
+                        🏠
+                    </div>
+
+                    <h3>
+                        ESTANZIA ENCLAVE EAST
+                    </h3>
+
+                    <p>
+                        View Inventory
+                    </p>
+
+                </div>
+
+
+                <!-- THE PENTHOUSE AT JEN -->
+
+                <div class="project-card"
+                     onclick="openProject('THE PENTHOUSE AT JEN')">
+
+                    <div class="project-icon">
+                        🏠
+                    </div>
+
+                    <h3>
+                        THE PENTHOUSE AT JEN
+                    </h3>
+
+                    <p>
+                        View Inventory
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             MIDDLE CONDO PROJECTS
+        ========================================== -->
+
+        <section id="condoSection"
+                 class="project-section"
+                 style="display:none;">
+
+            <h2 class="section-title">
+                MIDDLE CONDO
+            </h2>
+
+
+            <div class="project-row">
+
+
+                <!-- TERRACES AT JUBILATION -->
+
+                <div class="project-card"
+                     onclick="openProject('Terraces at Jubilation Enclave (Ter-Je)')">
+
+                    <div class="project-icon condo">
+                        🏢
+                    </div>
+
+                    <h3>
+                        Terraces at Jubilation Enclave
+                    </h3>
+
+                    <span class="project-code">
+                        Ter-Je
+                    </span>
+
+                    <p>
+                        View Inventory
+                    </p>
+
+                </div>
+
+
+                <!-- TERRACES AT TRADIZO -->
+
+                <div class="project-card"
+                     onclick="openProject('Terraces at Tradizo Enclave')">
+
+                    <div class="project-icon condo">
+                        🏢
+                    </div>
+
+                    <h3>
+                        Terraces at Tradizo Enclave
+                    </h3>
+
+                    <span class="project-code">
+                        Ter-Te
+                    </span>
+
+                    <p>
+                        View Inventory
+                    </p>
+
+                </div>
+
+
+                <!-- ZAYA -->
+
+                <div class="project-card"
+                     onclick="openProject('Zaya')">
+
+                    <div class="project-icon condo">
+                        🏢
+                    </div>
+
+                    <h3>
+                        Zaya
+                    </h3>
+
+                    <p>
+                        View Inventory
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             INVENTORY SECTION
+        ========================================== -->
+
+        <section id="inventorySection"
+                 class="inventory-section"
+                 style="display:none;">
+
+
+            <div class="project-header">
+
+                <h2 id="selectedProject">
+                    PROJECT
+                </h2>
 
                 <p>
-                    <strong>Lot Alias:</strong>
-                    <span id="condoLotAlias"></span>
-                </p>
-
-                <p>
-                    <strong>Building & Floor:</strong>
-                    <span id="condoBuildingFloor"></span>
-                </p>
-
-                <p>
-                    <strong>Unit Code:</strong>
-                    <span id="condoUnitCode"></span>
-                </p>
-
-                <p>
-                    <strong>Floor Area:</strong>
-                    <span id="condoFloorArea"></span>
-                </p>
-
-                <p>
-                    <strong>Unit Model:</strong>
-                    <span id="condoUnitModel"></span>
-                </p>
-
-                <p>
-                    <strong>Gross Contract Price:</strong>
-                    <span id="condoPrice"></span>
+                    Select an available unit.
                 </p>
 
             </div>
 
 
-        </div>
+            <!-- =====================================
+                 AUTOMATIC BLOCKS AND LOTS
+            ====================================== -->
+
+            <div id="inventoryContainer"></div>
 
 
-        <!-- =================================
-             POPUP BUTTONS
-        ================================== -->
-
-        <div class="modal-buttons">
+            <!-- =====================================
+                 BACK BUTTON
+            ====================================== -->
 
             <button
                 type="button"
-                class="payment-button"
-                onclick="openPaymentCalculator()">
+                class="back-button"
+                onclick="backToProjects()">
 
-                PAYMENT CALCULATOR
+                ← Back to Projects
 
             </button>
 
 
-            <button
-                type="button"
-                class="hold-button"
-                onclick="holdUnit()">
+        </section>
 
-                HOLD THIS UNIT
 
-            </button>
+    </main>
+
+
+    <!-- =========================================
+         UNIT DETAILS MODAL
+    ========================================== -->
+
+    <div id="unitModal"
+         class="modal"
+         onclick="closeOutside(event)">
+
+
+        <div class="modal-content">
+
+
+            <span class="close"
+                  onclick="closeUnitDetails()">
+
+                &times;
+
+            </span>
+
+
+            <h2>
+                UNIT DETAILS
+            </h2>
+
+
+            <div class="unit-info">
+
+
+                <!-- =================================
+                     MIDDLE HOUSING
+                ================================== -->
+
+                <div id="housingDetails">
+
+
+                    <p>
+                        <strong>Project:</strong>
+
+                        <span id="detailProject"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>Lot Alias:</strong>
+
+                        <span id="detailLotAlias"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>Block:</strong>
+
+                        <span id="detailBlock"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>Lot:</strong>
+
+                        <span id="detailLot"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>Lot Area:</strong>
+
+                        <span id="detailLotArea"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>Floor Area:</strong>
+
+                        <span id="detailFloorArea"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>House Model:</strong>
+
+                        <span id="detailHouseModel"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>Gross Contract Price:</strong>
+
+                        <span id="detailPrice"></span>
+                    </p>
+
+
+                </div>
+
+
+                <!-- =================================
+                     MIDDLE CONDO
+                ================================== -->
+
+                <div id="condoDetails"
+                     style="display:none;">
+
+
+                    <p>
+                        <strong>Project:</strong>
+
+                        <span id="condoProject"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>Lot Alias:</strong>
+
+                        <span id="condoLotAlias"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>Building & Floor:</strong>
+
+                        <span id="condoBuildingFloor"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>Unit Code:</strong>
+
+                        <span id="condoUnitCode"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>Floor Area:</strong>
+
+                        <span id="condoFloorArea"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>Unit Model:</strong>
+
+                        <span id="condoUnitModel"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>Gross Contract Price:</strong>
+
+                        <span id="condoPrice"></span>
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================
+                 POPUP BUTTONS
+            ================================== -->
+
+            <div class="modal-buttons">
+
+
+                <button
+                    type="button"
+                    class="payment-button"
+                    onclick="openPaymentCalculator()">
+
+                    PAYMENT CALCULATOR
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="hold-button"
+                    onclick="holdUnit()">
+
+                    HOLD THIS UNIT
+
+                </button>
+
+
+            </div>
+
 
         </div>
-
 
     </div>
 
-</div>
+
+    <!-- =========================================
+         JAVASCRIPT FILES
+    ========================================== -->
+
+    <script src="inventory-data.js"></script>
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
