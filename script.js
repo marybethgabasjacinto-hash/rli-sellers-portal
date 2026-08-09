@@ -5,6 +5,26 @@
 
 
 /* =========================================
+   CHECK INVENTORY DATA
+========================================= */
+
+function checkInventoryData() {
+
+    if (typeof INVENTORY_DATA === "undefined") {
+
+        alert(
+            "ERROR: inventory-data.js is not loaded.\n\n" +
+            "Make sure this is connected BEFORE script.js."
+        );
+
+        return false;
+    }
+
+    return true;
+}
+
+
+/* =========================================
    SHOW MIDDLE HOUSING
 ========================================= */
 
@@ -19,10 +39,12 @@ function showHousing() {
     const inventorySection =
         document.getElementById("inventorySection");
 
-
-    if (housingSection) {
-        housingSection.style.display = "block";
+    if (!housingSection) {
+        alert("ERROR: housingSection not found.");
+        return;
     }
+
+    housingSection.style.display = "block";
 
     if (condoSection) {
         condoSection.style.display = "none";
@@ -31,7 +53,6 @@ function showHousing() {
     if (inventorySection) {
         inventorySection.style.display = "none";
     }
-
 
     window.scrollTo({
         top: 0,
@@ -55,19 +76,20 @@ function showCondo() {
     const inventorySection =
         document.getElementById("inventorySection");
 
+    if (!condoSection) {
+        alert("ERROR: condoSection not found.");
+        return;
+    }
+
+    condoSection.style.display = "block";
 
     if (housingSection) {
         housingSection.style.display = "none";
     }
 
-    if (condoSection) {
-        condoSection.style.display = "block";
-    }
-
     if (inventorySection) {
         inventorySection.style.display = "none";
     }
-
 
     window.scrollTo({
         top: 0,
@@ -82,11 +104,18 @@ function showCondo() {
 
 function openProject(projectName) {
 
+    if (!checkInventoryData()) {
+        return;
+    }
+
     const housingSection =
         document.getElementById("housingSection");
 
     const condoSection =
         document.getElementById("condoSection");
+
+    const projectsSection =
+        document.getElementById("projectsSection");
 
     const inventorySection =
         document.getElementById("inventorySection");
@@ -98,47 +127,21 @@ function openProject(projectName) {
         document.getElementById("inventoryContainer");
 
 
-    /* CHECK ELEMENTS */
-
     if (!inventorySection) {
-
-        alert(
-            "ERROR: inventorySection not found."
-        );
-
+        alert("ERROR: inventorySection not found.");
         return;
     }
-
 
     if (!selectedProject) {
-
-        alert(
-            "ERROR: selectedProject not found."
-        );
-
+        alert("ERROR: selectedProject not found.");
         return;
     }
-
 
     if (!inventoryContainer) {
-
         alert(
             "ERROR: inventoryContainer not found.\n\n" +
-            "Please make sure your inventory.html has:\n" +
-            '<div id="inventoryContainer"></div>'
-        );
-
-        return;
-    }
-
-
-    /* CHECK INVENTORY DATA */
-
-    if (typeof INVENTORY_DATA === "undefined") {
-
-        alert(
-            "ERROR: inventory-data.js is not loaded.\n\n" +
-            "Make sure inventory-data.js is connected BEFORE script.js."
+            "Please add <div id=\"inventoryContainer\"></div> " +
+            "inside inventorySection."
         );
 
         return;
@@ -146,6 +149,10 @@ function openProject(projectName) {
 
 
     /* HIDE PROJECT SECTIONS */
+
+    if (projectsSection) {
+        projectsSection.style.display = "none";
+    }
 
     if (housingSection) {
         housingSection.style.display = "none";
@@ -159,7 +166,6 @@ function openProject(projectName) {
     /* SHOW INVENTORY */
 
     inventorySection.style.display = "block";
-
 
     selectedProject.innerText =
         projectName;
@@ -186,35 +192,11 @@ function loadInventory(projectName) {
     const container =
         document.getElementById("inventoryContainer");
 
-
     if (!container) {
         return;
     }
 
-
     container.innerHTML = "";
-
-
-    /* =====================================
-       CHECK DATA
-    ===================================== */
-
-    if (typeof INVENTORY_DATA === "undefined") {
-
-        container.innerHTML = `
-            <div class="block-card">
-
-                <h3>Inventory Data Error</h3>
-
-                <p>
-                    inventory-data.js was not loaded.
-                </p>
-
-            </div>
-        `;
-
-        return;
-    }
 
 
     /* =====================================
@@ -222,19 +204,19 @@ function loadInventory(projectName) {
     ===================================== */
 
     const housingData =
-        Array.isArray(
-            INVENTORY_DATA.middleHousing
-        )
+        Array.isArray(INVENTORY_DATA.middleHousing)
+            ? INVENTORY_DATA.middleHousing.filter(
+                function(unit) {
 
-        ? INVENTORY_DATA.middleHousing.filter(
-            function(unit) {
+                    return (
+                        unit.project &&
+                        unit.project.trim().toUpperCase() ===
+                        projectName.trim().toUpperCase()
+                    );
 
-                return unit.project === projectName;
-
-            }
-        )
-
-        : [];
+                }
+            )
+            : [];
 
 
     /* =====================================
@@ -242,19 +224,19 @@ function loadInventory(projectName) {
     ===================================== */
 
     const condoData =
-        Array.isArray(
-            INVENTORY_DATA.middleCondo
-        )
+        Array.isArray(INVENTORY_DATA.middleCondo)
+            ? INVENTORY_DATA.middleCondo.filter(
+                function(unit) {
 
-        ? INVENTORY_DATA.middleCondo.filter(
-            function(unit) {
+                    return (
+                        unit.project &&
+                        unit.project.trim().toUpperCase() ===
+                        projectName.trim().toUpperCase()
+                    );
 
-                return unit.project === projectName;
-
-            }
-        )
-
-        : [];
+                }
+            )
+            : [];
 
 
     /* =====================================
@@ -332,13 +314,9 @@ function renderHousingInventory(
         const blockName =
             unit.block || "Block";
 
-
         if (!blocks[blockName]) {
-
             blocks[blockName] = [];
-
         }
-
 
         blocks[blockName].push(unit);
 
@@ -353,16 +331,13 @@ function renderHousingInventory(
             const blockCard =
                 document.createElement("div");
 
-
             blockCard.className =
                 "block-card";
 
 
             blockCard.innerHTML = `
 
-                <h3>
-                    ${blockName}
-                </h3>
+                <h3>${blockName}</h3>
 
                 <div class="lot-grid"></div>
 
@@ -385,41 +360,39 @@ function renderHousingInventory(
                             "button"
                         );
 
-
                     lotButton.type =
                         "button";
-
 
                     lotButton.className =
                         "lot";
 
 
-                    let lotNumber =
-                        unit.lot || "";
-
-
-                    lotNumber =
-                        String(lotNumber)
+                    const lotNumber =
+                        String(
+                            unit.lot || ""
+                        )
                         .replace(
                             /^Lot\s*/i,
+                            ""
+                        )
+                        .replace(
+                            /^0+/,
                             ""
                         );
 
 
                     lotButton.innerText =
-                        lotNumber;
+                        lotNumber || "1";
 
 
-                    lotButton.addEventListener(
-                        "click",
+                    lotButton.onclick =
                         function() {
 
                             showHousingDetails(
                                 unit
                             );
 
-                        }
-                    );
+                        };
 
 
                     lotGrid.appendChild(
@@ -451,16 +424,13 @@ function renderCondoInventory(
     const condoCard =
         document.createElement("div");
 
-
     condoCard.className =
         "block-card";
 
 
     condoCard.innerHTML = `
 
-        <h3>
-            AVAILABLE UNITS
-        </h3>
+        <h3>AVAILABLE UNITS</h3>
 
         <div class="lot-grid"></div>
 
@@ -480,29 +450,24 @@ function renderCondoInventory(
                 "button"
             );
 
-
         unitButton.type =
             "button";
-
 
         unitButton.className =
             "lot";
 
-
         unitButton.innerText =
-            unit.unitCode || "";
+            unit.unitCode;
 
 
-        unitButton.addEventListener(
-            "click",
+        unitButton.onclick =
             function() {
 
                 showCondoDetails(
                     unit
                 );
 
-            }
-        );
+            };
 
 
         lotGrid.appendChild(
@@ -535,108 +500,61 @@ function showHousingDetails(unit) {
         );
 
 
-    /* SHOW HOUSING */
-
     if (housingDetails) {
-
         housingDetails.style.display =
             "block";
-
     }
-
-
-    /* HIDE CONDO */
 
     if (condoDetails) {
-
         condoDetails.style.display =
             "none";
-
     }
 
 
-    /* PROJECT */
+    setText(
+        "detailProject",
+        unit.project
+    );
 
-    document.getElementById(
-        "detailProject"
-    ).innerText =
-        unit.project || "";
+    setText(
+        "detailLotAlias",
+        unit.lotAlias
+    );
 
+    setText(
+        "detailBlock",
+        unit.block
+    );
 
-    /* LOT ALIAS */
+    setText(
+        "detailLot",
+        unit.lot
+    );
 
-    document.getElementById(
-        "detailLotAlias"
-    ).innerText =
-        unit.lotAlias || "";
+    setText(
+        "detailLotArea",
+        unit.lotArea + " sqm"
+    );
 
+    setText(
+        "detailFloorArea",
+        unit.floorArea + " sqm"
+    );
 
-    /* BLOCK */
+    setText(
+        "detailHouseModel",
+        unit.houseModel
+    );
 
-    document.getElementById(
-        "detailBlock"
-    ).innerText =
-        unit.block || "";
-
-
-    /* LOT */
-
-    document.getElementById(
-        "detailLot"
-    ).innerText =
-        unit.lot || "";
-
-
-    /* LOT AREA */
-
-    document.getElementById(
-        "detailLotArea"
-    ).innerText =
-        (unit.lotArea || 0) +
-        " sqm";
-
-
-    /* FLOOR AREA */
-
-    document.getElementById(
-        "detailFloorArea"
-    ).innerText =
-        (unit.floorArea || 0) +
-        " sqm";
-
-
-    /* HOUSE MODEL */
-
-    document.getElementById(
-        "detailHouseModel"
-    ).innerText =
-        unit.houseModel || "";
-
-
-    /* PRICE */
-
-    document.getElementById(
-        "detailPrice"
-    ).innerText =
+    setText(
+        "detailPrice",
         formatPrice(
             unit.grossContractPrice
-        );
+        )
+    );
 
 
-    /* OPEN MODAL */
-
-    const modal =
-        document.getElementById(
-            "unitModal"
-        );
-
-
-    if (modal) {
-
-        modal.style.display =
-            "flex";
-
-    }
+    openModal();
 }
 
 
@@ -657,97 +575,103 @@ function showCondoDetails(unit) {
         );
 
 
-    /* HIDE HOUSING */
-
     if (housingDetails) {
-
         housingDetails.style.display =
             "none";
-
     }
-
-
-    /* SHOW CONDO */
 
     if (condoDetails) {
-
         condoDetails.style.display =
             "block";
-
     }
 
 
-    /* PROJECT */
+    setText(
+        "condoProject",
+        unit.project
+    );
 
-    document.getElementById(
-        "condoProject"
-    ).innerText =
-        unit.project || "";
+    setText(
+        "condoLotAlias",
+        unit.lotAlias
+    );
 
+    setText(
+        "condoBuildingFloor",
+        unit.buildingFloor
+    );
 
-    /* LOT ALIAS */
+    setText(
+        "condoUnitCode",
+        unit.unitCode
+    );
 
-    document.getElementById(
-        "condoLotAlias"
-    ).innerText =
-        unit.lotAlias || "";
+    setText(
+        "condoFloorArea",
+        unit.floorArea + " sqm"
+    );
 
+    setText(
+        "condoUnitModel",
+        unit.unitModel
+    );
 
-    /* BUILDING & FLOOR */
-
-    document.getElementById(
-        "condoBuildingFloor"
-    ).innerText =
-        unit.buildingFloor || "";
-
-
-    /* UNIT CODE */
-
-    document.getElementById(
-        "condoUnitCode"
-    ).innerText =
-        unit.unitCode || "";
-
-
-    /* FLOOR AREA */
-
-    document.getElementById(
-        "condoFloorArea"
-    ).innerText =
-        (unit.floorArea || 0) +
-        " sqm";
-
-
-    /* UNIT MODEL */
-
-    document.getElementById(
-        "condoUnitModel"
-    ).innerText =
-        unit.unitModel || "";
-
-
-    /* PRICE */
-
-    document.getElementById(
-        "condoPrice"
-    ).innerText =
+    setText(
+        "condoPrice",
         formatPrice(
             unit.grossContractPrice
+        )
+    );
+
+
+    openModal();
+}
+
+
+/* =========================================
+   SET TEXT HELPER
+========================================= */
+
+function setText(
+    elementId,
+    value
+) {
+
+    const element =
+        document.getElementById(
+            elementId
         );
 
+    if (element) {
 
-    /* OPEN MODAL */
+        element.innerText =
+            value || "";
+
+    }
+}
+
+
+/* =========================================
+   OPEN MODAL
+========================================= */
+
+function openModal() {
 
     const modal =
         document.getElementById(
             "unitModal"
         );
 
-
     if (modal) {
 
         modal.style.display =
             "flex";
+
+    } else {
+
+        alert(
+            "ERROR: unitModal not found."
+        );
 
     }
 }
@@ -769,12 +693,11 @@ function formatPrice(price) {
                 maximumFractionDigits: 2
             }
         );
-
 }
 
 
 /* =========================================
-   CLOSE UNIT DETAILS
+   CLOSE MODAL
 ========================================= */
 
 function closeUnitDetails() {
@@ -783,7 +706,6 @@ function closeUnitDetails() {
         document.getElementById(
             "unitModal"
         );
-
 
     if (modal) {
 
@@ -795,7 +717,7 @@ function closeUnitDetails() {
 
 
 /* =========================================
-   CLOSE OUTSIDE MODAL
+   CLOSE WHEN CLICKING OUTSIDE
 ========================================= */
 
 function closeOutside(event) {
@@ -804,7 +726,6 @@ function closeOutside(event) {
         document.getElementById(
             "unitModal"
         );
-
 
     if (
         modal &&
@@ -828,7 +749,6 @@ function openPaymentCalculator() {
         "Next step: ikokonekta natin " +
         "ang actual Payment Calculator."
     );
-
 }
 
 
@@ -838,100 +758,31 @@ function openPaymentCalculator() {
 
 function holdUnit() {
 
-    const housingDetails =
-        document.getElementById(
-            "housingDetails"
-        );
-
-
-    const housingVisible =
-        housingDetails &&
-        housingDetails.style.display !== "none";
-
-
-    /* =====================================
-       MIDDLE HOUSING
-    ===================================== */
-
-    if (housingVisible) {
-
-        const project =
-            document.getElementById(
-                "detailProject"
-            ).innerText;
-
-
-        const lotAlias =
-            document.getElementById(
-                "detailLotAlias"
-            ).innerText;
-
-
-        const block =
-            document.getElementById(
-                "detailBlock"
-            ).innerText;
-
-
-        const lot =
-            document.getElementById(
-                "detailLot"
-            ).innerText;
-
-
-        alert(
-
-            "HOLD THIS UNIT\n\n" +
-
-            "Project: " +
-            project +
-
-            "\nLot Alias: " +
-            lotAlias +
-
-            "\nBlock: " +
-            block +
-
-            "\nLot: " +
-            lot
-
-        );
-
-
-        return;
-    }
-
-
-    /* =====================================
-       MIDDLE CONDO
-    ===================================== */
-
     const project =
         document.getElementById(
-            "condoProject"
-        ).innerText;
+            "detailProject"
+        )?.innerText || "";
 
 
     const lotAlias =
         document.getElementById(
-            "condoLotAlias"
-        ).innerText;
+            "detailLotAlias"
+        )?.innerText || "";
 
 
-    const buildingFloor =
+    const block =
         document.getElementById(
-            "condoBuildingFloor"
-        ).innerText;
+            "detailBlock"
+        )?.innerText || "";
 
 
-    const unitCode =
+    const lot =
         document.getElementById(
-            "condoUnitCode"
-        ).innerText;
+            "detailLot"
+        )?.innerText || "";
 
 
     alert(
-
         "HOLD THIS UNIT\n\n" +
 
         "Project: " +
@@ -940,19 +791,17 @@ function holdUnit() {
         "\nLot Alias: " +
         lotAlias +
 
-        "\nBuilding & Floor: " +
-        buildingFloor +
+        "\nBlock / Building: " +
+        block +
 
-        "\nUnit Code: " +
-        unitCode
-
+        "\nLot / Unit: " +
+        lot
     );
-
 }
 
 
 /* =========================================
-   BACK TO PROJECTS
+   BACK TO PROJECT TYPE
 ========================================= */
 
 function backToProjects() {
@@ -962,12 +811,10 @@ function backToProjects() {
             "inventorySection"
         );
 
-
     const housingSection =
         document.getElementById(
             "housingSection"
         );
-
 
     const condoSection =
         document.getElementById(
@@ -976,39 +823,24 @@ function backToProjects() {
 
 
     if (inventorySection) {
-
         inventorySection.style.display =
             "none";
-
     }
 
-
     /*
-       Ibalik natin ang tamang project
-       section depende sa previous selection.
+       Hindi muna projectsSection.
+       Ibalik natin sa product type/project
+       structure depende sa current HTML.
     */
 
-    if (
-        window.currentProductType ===
-        "condo"
-    ) {
+    if (housingSection) {
+        housingSection.style.display =
+            "block";
+    }
 
-        if (condoSection) {
-
-            condoSection.style.display =
-                "block";
-
-        }
-
-    } else {
-
-        if (housingSection) {
-
-            housingSection.style.display =
-                "block";
-
-        }
-
+    if (condoSection) {
+        condoSection.style.display =
+            "none";
     }
 
 
@@ -1016,37 +848,26 @@ function backToProjects() {
         top: 0,
         behavior: "smooth"
     });
-
 }
 
 
 /* =========================================
-   REMEMBER PRODUCT TYPE
+   PAGE READY
 ========================================= */
 
-const originalShowHousing =
-    window.showHousing;
-
-window.showHousing =
+document.addEventListener(
+    "DOMContentLoaded",
     function() {
 
-        window.currentProductType =
-            "housing";
+        console.log(
+            "RLI Sellers Portal loaded."
+        );
 
-        originalShowHousing();
+        console.log(
+            "INVENTORY_DATA:",
+            typeof INVENTORY_DATA !==
+            "undefined"
+        );
 
-    };
-
-
-const originalShowCondo =
-    window.showCondo;
-
-window.showCondo =
-    function() {
-
-        window.currentProductType =
-            "condo";
-
-        originalShowCondo();
-
-    };
+    }
+);
