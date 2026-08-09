@@ -2,39 +2,72 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>RLI Sellers Portal</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+          href="style.css">
+
 </head>
+
 
 <body>
 
+
 <header>
-    <h1>RLI Sellers Portal</h1>
-    <p>Real-time Sales & Inventory Portal</p>
+
+    <h1>
+        RLI Sellers Portal
+    </h1>
+
+    <p>
+        Real-time Sales & Inventory Portal
+    </p>
+
 </header>
 
 
 <main class="container">
 
-    <!-- WELCOME -->
+
+    <!-- =========================================
+         WELCOME
+    ========================================== -->
+
     <section class="welcome">
-        <h2>Welcome, Seller!</h2>
-        <p>Select a product type to continue.</p>
+
+        <h2>
+            Welcome, Seller!
+        </h2>
+
+        <p>
+            Select a product type to continue.
+        </p>
+
     </section>
 
 
-    <!-- PRODUCT TYPE -->
+    <!-- =========================================
+         PRODUCT TYPE
+    ========================================== -->
+
     <section class="product-section">
 
-        <h2 class="section-title">PRODUCT TYPE</h2>
+        <h2 class="section-title">
+            PRODUCT TYPE
+        </h2>
+
 
         <div class="category-row">
 
+
             <!-- MIDDLE HOUSING -->
+
             <div class="category-card"
                  onclick="showHousing()">
 
@@ -42,14 +75,19 @@
                     🏠
                 </div>
 
-                <h3>Middle Housing</h3>
+                <h3>
+                    Middle Housing
+                </h3>
 
-                <p>View House & Lot Projects</p>
+                <p>
+                    View House & Lot Projects
+                </p>
 
             </div>
 
 
             <!-- MIDDLE CONDO -->
+
             <div class="category-card"
                  onclick="showCondo()">
 
@@ -57,20 +95,25 @@
                     🏢
                 </div>
 
-                <h3>Middle Condo</h3>
+                <h3>
+                    Middle Condo
+                </h3>
 
-                <p>View Condo Projects</p>
+                <p>
+                    View Condo Projects
+                </p>
 
             </div>
+
 
         </div>
 
     </section>
 
 
-    <!-- =========================
+    <!-- =========================================
          MIDDLE HOUSING PROJECTS
-    ========================== -->
+    ========================================== -->
 
     <section id="housingSection"
              class="project-section"
@@ -80,10 +123,9 @@
             MIDDLE HOUSING
         </h2>
 
+
         <div class="project-row">
 
-
-            <!-- AGAPEYA EAST -->
 
             <div class="project-card"
                  onclick="openProject('AGAPEYA EAST')">
@@ -92,14 +134,16 @@
                     🏠
                 </div>
 
-                <h3>AGAPEYA EAST</h3>
+                <h3>
+                    AGAPEYA EAST
+                </h3>
 
-                <p>View Inventory</p>
+                <p>
+                    View Inventory
+                </p>
 
             </div>
 
-
-            <!-- VALENZIA ENCLAVE EAST-->
 
             <div class="project-card"
                  onclick="openProject('VALENZIA ENCLAVE EAST')">
@@ -108,14 +152,16 @@
                     🏠
                 </div>
 
-                <h3>VALENZIA ENCLAVE EAST</h3>
+                <h3>
+                    VALENZIA ENCLAVE EAST
+                </h3>
 
-                <p>View Inventory</p>
+                <p>
+                    View Inventory
+                </p>
 
             </div>
 
-
-            <!-- AGAPEYA WEST -->
 
             <div class="project-card"
                  onclick="openProject('AGAPEYA WEST')">
@@ -124,14 +170,16 @@
                     🏠
                 </div>
 
-                <h3>AGAPEYA WEST</h3>
+                <h3>
+                    AGAPEYA WEST
+                </h3>
 
-                <p>View Inventory</p>
+                <p>
+                    View Inventory
+                </p>
 
             </div>
 
-
-            <!-- ESTANZIA ENCLAVE EAST-->
 
             <div class="project-card"
                  onclick="openProject('ESTANZIA ENCLAVE EAST')">
@@ -140,14 +188,16 @@
                     🏠
                 </div>
 
-                <h3>ESTANZIA ENCLAVE EAST</h3>
+                <h3>
+                    ESTANZIA ENCLAVE EAST
+                </h3>
 
-                <p>View Inventory</p>
+                <p>
+                    View Inventory
+                </p>
 
             </div>
 
-
-            <!-- THE PENTHOUSE AT JEN -->
 
             <div class="project-card"
                  onclick="openProject('THE PENTHOUSE AT JEN')">
@@ -156,20 +206,25 @@
                     🏠
                 </div>
 
-                <h3>THE PENTHOUSE AT JEN</h3>
+                <h3>
+                    THE PENTHOUSE AT JEN
+                </h3>
 
-                <p>View Inventory</p>
+                <p>
+                    View Inventory
+                </p>
 
             </div>
+
 
         </div>
 
     </section>
 
 
-    <!-- =========================
+    <!-- =========================================
          MIDDLE CONDO PROJECTS
-    ========================== -->
+    ========================================== -->
 
     <section id="condoSection"
              class="project-section"
@@ -179,10 +234,9 @@
             MIDDLE CONDO
         </h2>
 
+
         <div class="project-row">
 
-
-            <!-- TERRACES AT JUBILATION ENCLAVE -->
 
             <div class="project-card"
                  onclick="openProject('Terraces at Jubilation Enclave (Ter-Je)')">
@@ -199,15 +253,15 @@
                     Ter-Je
                 </span>
 
-                <p>View Inventory</p>
+                <p>
+                    View Inventory
+                </p>
 
             </div>
 
 
-            <!-- TERRACES AT TRADIZO Enclave -->
-
             <div class="project-card"
-                 onclick="openProject('Terraces at Tradizo Enclave (Ter-Te)')">
+                 onclick="openProject('Terraces at Tradizo Enclave')">
 
                 <div class="project-icon condo">
                     🏢
@@ -221,12 +275,12 @@
                     Ter-Te
                 </span>
 
-                <p>View Inventory</p>
+                <p>
+                    View Inventory
+                </p>
 
             </div>
 
-
-            <!-- ZAYA -->
 
             <div class="project-card"
                  onclick="openProject('Zaya')">
@@ -235,20 +289,25 @@
                     🏢
                 </div>
 
-                <h3>Zaya</h3>
+                <h3>
+                    Zaya
+                </h3>
 
-                <p>View Inventory</p>
+                <p>
+                    View Inventory
+                </p>
 
             </div>
+
 
         </div>
 
     </section>
 
 
-    <!-- =========================
-         INVENTORY SECTION
-    ========================== -->
+    <!-- =========================================
+         AUTOMATIC INVENTORY
+    ========================================== -->
 
     <section id="inventorySection"
              class="inventory-section"
@@ -267,134 +326,15 @@
         </div>
 
 
-        <!-- BLOCK 1 -->
+        <!-- BLOCKS AND LOTS WILL APPEAR HERE -->
 
-        <div class="block-card">
-
-            <h3>BLOCK 1</h3>
-
-            <div class="lot-grid">
-
-                <button class="lot"
-                        onclick="showUnitDetails(1,1)">
-                    1
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(1,2)">
-                    2
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(1,3)">
-                    3
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(1,4)">
-                    4
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(1,5)">
-                    5
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(1,6)">
-                    6
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(1,7)">
-                    7
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(1,8)">
-                    8
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(1,9)">
-                    9
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(1,10)">
-                    10
-                </button>
-
-            </div>
-
-        </div>
+        <div id="inventoryContainer"></div>
 
 
-        <!-- BLOCK 2 -->
-
-        <div class="block-card">
-
-            <h3>BLOCK 2</h3>
-
-            <div class="lot-grid">
-
-                <button class="lot"
-                        onclick="showUnitDetails(2,1)">
-                    1
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(2,2)">
-                    2
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(2,3)">
-                    3
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(2,4)">
-                    4
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(2,5)">
-                    5
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(2,6)">
-                    6
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(2,7)">
-                    7
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(2,8)">
-                    8
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(2,9)">
-                    9
-                </button>
-
-                <button class="lot"
-                        onclick="showUnitDetails(2,10)">
-                    10
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <button class="back-button"
-                onclick="backToProjects()">
+        <button
+            type="button"
+            class="back-button"
+            onclick="backToProjects()">
 
             ← Back to Projects
 
@@ -402,12 +342,13 @@
 
     </section>
 
+
 </main>
 
 
-<!-- =========================
+<!-- =========================================
      UNIT DETAILS POPUP
-========================== -->
+========================================= -->
 
 <div id="unitModal"
      class="modal"
@@ -421,75 +362,123 @@
         </span>
 
 
-        <h2>UNIT DETAILS</h2>
+        <h2>
+            UNIT DETAILS
+        </h2>
 
 
         <div class="unit-info">
 
-            <p>
-                <strong>Project:</strong>
-                <span id="detailProject">
-                    AGAPEYA EAST
-                </span>
-            </p>
 
-            <p>
-                <strong>Block:</strong>
-                <span id="detailBlock">
-                    1
-                </span>
-            </p>
+            <!-- MIDDLE HOUSING -->
 
-            <p>
-                <strong>Lot:</strong>
-                <span id="detailLot">
-                    3
-                </span>
-            </p>
+            <div id="housingDetails">
 
-            <p>
-                <strong>Lot Area:</strong>
-                <span id="detailLotArea">
-                    100 sqm
-                </span>
-            </p>
+                <p>
+                    <strong>Project:</strong>
+                    <span id="detailProject"></span>
+                </p>
 
-            <p>
-                <strong>Floor Area:</strong>
-                <span id="detailFloorArea">
-                    50 sqm
-                </span>
-            </p>
+                <p>
+                    <strong>Lot Alias:</strong>
+                    <span id="detailLotAlias"></span>
+                </p>
 
-            <p>
-                <strong>House Model:</strong>
-                <span id="detailHouseModel">
-                    Model A
-                </span>
-            </p>
+                <p>
+                    <strong>Block:</strong>
+                    <span id="detailBlock"></span>
+                </p>
 
-            <p>
-                <strong>Price:</strong>
-                <span id="detailPrice">
-                    ₱3,500,000
-                </span>
-            </p>
+                <p>
+                    <strong>Lot:</strong>
+                    <span id="detailLot"></span>
+                </p>
+
+                <p>
+                    <strong>Lot Area:</strong>
+                    <span id="detailLotArea"></span>
+                </p>
+
+                <p>
+                    <strong>Floor Area:</strong>
+                    <span id="detailFloorArea"></span>
+                </p>
+
+                <p>
+                    <strong>House Model:</strong>
+                    <span id="detailHouseModel"></span>
+                </p>
+
+                <p>
+                    <strong>Gross Contract Price:</strong>
+                    <span id="detailPrice"></span>
+                </p>
+
+            </div>
+
+
+            <!-- MIDDLE CONDO -->
+
+            <div id="condoDetails"
+                 style="display:none;">
+
+                <p>
+                    <strong>Project:</strong>
+                    <span id="condoProject"></span>
+                </p>
+
+                <p>
+                    <strong>Lot Alias:</strong>
+                    <span id="condoLotAlias"></span>
+                </p>
+
+                <p>
+                    <strong>Building & Floor:</strong>
+                    <span id="condoBuildingFloor"></span>
+                </p>
+
+                <p>
+                    <strong>Unit Code:</strong>
+                    <span id="condoUnitCode"></span>
+                </p>
+
+                <p>
+                    <strong>Floor Area:</strong>
+                    <span id="condoFloorArea"></span>
+                </p>
+
+                <p>
+                    <strong>Unit Model:</strong>
+                    <span id="condoUnitModel"></span>
+                </p>
+
+                <p>
+                    <strong>Gross Contract Price:</strong>
+                    <span id="condoPrice"></span>
+                </p>
+
+            </div>
+
 
         </div>
 
 
         <div class="modal-buttons">
 
-            <button class="payment-button"
-                    onclick="openPaymentCalculator()">
+            <button
+                type="button"
+                class="payment-button"
+                onclick="openPaymentCalculator()">
 
                 PAYMENT CALCULATOR
 
             </button>
 
 
-            <button class="hold-button"
-                    onclick="holdUnit()">
+            <button
+                type="button"
+                class="hold-button"
+                onclick="holdUnit()">
 
                 HOLD THIS UNIT
 
@@ -497,12 +486,20 @@
 
         </div>
 
+
     </div>
 
 </div>
 
 
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script src="inventory-data.js"></script>
+
 <script src="script.js"></script>
+
 
 </body>
 
